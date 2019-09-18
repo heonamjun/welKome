@@ -1,4 +1,4 @@
-package com.example.sktrip.model;
+package com.example.sktrip.TourApi.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

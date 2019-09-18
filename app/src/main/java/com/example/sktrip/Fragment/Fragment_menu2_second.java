@@ -1,46 +1,51 @@
 package com.example.sktrip.Fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.SearchView;
+import android.widget.Spinner;
 
+import com.example.sktrip.Adapter.DataAdapter;
+import com.example.sktrip.Data.GradeTourData;
+import com.example.sktrip.TourApi.LoadTourApi;
+import com.example.sktrip.TourApi.OnItemClick;
 import com.example.sktrip.R;
+import com.example.sktrip.TourApi.TourApiService;
+import com.example.sktrip.TourApi.Model.DataRES;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_menu2_second extends Fragment {
-    public static final String PAGE_TITLE = "식당";
-    // Store instance variables
-    private String title;
-    private int page;
+    private RecyclerView recyclerView;
+    private DataAdapter adapter;
 
-    // newInstance constructor for creating fragment with arguments
-    public static Fragment_menu2_second newInstance(int page, String title) {
+    public static Fragment_menu2_second newInstance() {
         Fragment_menu2_second fragment = new Fragment_menu2_second();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        fragment.setArguments(args);
         return fragment;
     }
 
-    // Store instance variables based on arguments passed
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
-
     }
 
-    // Inflate the view for the fragment based on layout XML
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_menu2_second, container, false);
-        EditText tvLabel = (EditText) view.findViewById(R.id.editText);
-        tvLabel.setText(page + " -- " + title);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_menu2_first, container, false);
         return view;
     }
+
 }

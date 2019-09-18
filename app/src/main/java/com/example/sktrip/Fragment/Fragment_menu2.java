@@ -3,23 +3,23 @@ package com.example.sktrip.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.Layout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
+
+import com.example.sktrip.Adapter.TabPagerAdapter;
 import com.example.sktrip.R;
 
 public class Fragment_menu2 extends Fragment {
-    public static final String PAGE_TITLE = "평가하기";
-    ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
 
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private TabPagerAdapter tabPagerAdapter;
+    private ViewPager viewPager;
 
     public Fragment_menu2() {
         // Required empty public constructor
@@ -40,63 +40,50 @@ public class Fragment_menu2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu2, container, false);
 
+        toolbar = (Toolbar) view.findViewById(R.id.TourToolbar);
+        tabLayout = (TabLayout) view.findViewById(R.id.TourTopLayout);
         viewPager = (ViewPager) view.findViewById(R.id.vpPager);
-        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
+
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
+
+        tabLayout.addTab(tabLayout.newTab().setText("관광"));
+        tabLayout.addTab(tabLayout.newTab().setText("음식점"));
+        tabLayout.addTab(tabLayout.newTab().setText("숙박"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        tabPagerAdapter = new TabPagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(tabPagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+        });
 
         return view;
     }
-
-
-    public static class ViewPagerAdapter extends FragmentStatePagerAdapter {
-        private static final int NUM_ITEMS = 3; // ViewPager 페이지 수
-
-        public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                return Fragment_menu2_first.newInstance(0,"A");
-            } else if (position == 1) {
-                return Fragment_menu2_second.newInstance(1, "B");
-            } else if (position == 2) {
-                return Fragment_menu2_third.newInstance(2,"C");
-            } else{
-                return Fragment_menu2.newInstance();
-            }
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            if (position == 0) {
-                return Fragment_menu2_first.PAGE_TITLE;
-            } else if (position == 1) {
-                return Fragment_menu2_second.PAGE_TITLE;
-            } else if (position == 2) {
-                return Fragment_menu2_third.PAGE_TITLE;
-            } else{
-                return Fragment_menu2.PAGE_TITLE;
-            }
-        }
-    }
-
-
-
-
 }
 
 

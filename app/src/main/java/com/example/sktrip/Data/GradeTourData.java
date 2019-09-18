@@ -1,110 +1,55 @@
-package com.example.sktrip.model;
+package com.example.sktrip.Data;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-public class Item {
-
-    @SerializedName("code")
-    @Expose
-    private Integer code;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("rnum")
-    @Expose
-    private Integer rnum;
-    @SerializedName("addr1")
-    @Expose
+public class GradeTourData {
     private String addr1;
-    @SerializedName("addr2")
-    @Expose
     private String addr2;
-    @SerializedName("areacode")
-    @Expose
     private Integer areacode;
-    @SerializedName("cat1")
-    @Expose
-    private String cat1;
-    @SerializedName("cat2")
-    @Expose
-    private String cat2;
-    @SerializedName("cat3")
-    @Expose
-    private String cat3;
-    @SerializedName("contentid")
-    @Expose
-    private Integer contentid;
-    @SerializedName("contenttypeid")
-    @Expose
-    private Integer contenttypeid;
-    @SerializedName("createdtime")
-    @Expose
-    private Long createdtime;
-    @SerializedName("firstimage")
-    @Expose
-    private String firstimage;
-    @SerializedName("firstimage2")
-    @Expose
-    private String firstimage2;
-    @SerializedName("mapx")
-    @Expose
-    private Double mapx;
-    @SerializedName("mapy")
-    @Expose
-    private Double mapy;
-    @SerializedName("mlevel")
-    @Expose
-    private Integer mlevel;
-    @SerializedName("modifiedtime")
-    @Expose
-    private Long modifiedtime;
-    @SerializedName("readcount")
-    @Expose
-    private Integer readcount;
-    @SerializedName("sigungucode")
-    @Expose
-    private Integer sigungucode;
-    @SerializedName("tel")
-    @Expose
-    private String tel;
-    @SerializedName("title")
-    @Expose
-    private String title;
-    @SerializedName("zipcode")
-    @Expose
-    private Integer zipcode;
-    @SerializedName("booktour")
-    @Expose
     private Integer booktour;
-    @SerializedName("dist")
-    @Expose
-    private Integer dist;
+    private String cat1;
+    private String cat2;
+    private String cat3;
+    private Integer contentid;
+    private Integer contenttypeid;
+    private Long createdtime;
+    private String firstimage;
+    private String firstimage2;
+    private Double mapx;
+    private Double mapy;
+    private Integer mlevel;
+    private Long modifiedtime;
+    private Integer readcount;
+    private Integer sigungucode;
+    private String tel;
+    private String title;
 
+    public GradeTourData(String title, String addr1, String addr2, Integer areacode, Integer booktour,
+                         String cat1, String cat2, String cat3, Integer contentid, Integer contenttypeid,
+                         Long createdtime, String firstimage, String firstimage2, Double mapx, Double mapy,
+                         Integer mlevel, Long modifiedtime, Integer readcount, Integer sigungucode, String tel){
 
-    public Integer getCode() {
-        return code;
+        this.title = title;
+        this.addr1 = addr1;
+        this.addr2 = addr2;
+        this.areacode = areacode;
+        this.booktour = booktour;
+        this.cat1 = cat1;
+        this.cat2 = cat2;
+        this.cat3 = cat3;
+        this.contentid = contentid;
+        this.contenttypeid = contenttypeid;
+        this.createdtime = createdtime;
+        this.firstimage = firstimage;
+        this.firstimage2 = firstimage2;
+        this.mapx = mapx;
+        this.mapy = mapy;
+        this.mlevel = mlevel;
+        this.modifiedtime = modifiedtime;
+        this.readcount = readcount;
+        this.sigungucode = sigungucode;
+        this.tel = tel;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getRnum() {
-        return rnum;
-    }
-
-    public void setRnum(Integer rnum) {
-        this.rnum = rnum;
-    }
 
     public String getAddr1() {
         return addr1;
@@ -128,6 +73,14 @@ public class Item {
 
     public void setAreacode(Integer areacode) {
         this.areacode = areacode;
+    }
+
+    public Integer getBooktour() {
+        return booktour;
+    }
+
+    public void setBooktour(Integer booktour) {
+        this.booktour = booktour;
     }
 
     public String getCat1() {
@@ -256,29 +209,5 @@ public class Item {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(Integer zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public Integer getBooktour() {
-        return booktour;
-    }
-
-    public void setBooktour(Integer booktour) {
-        this.booktour = booktour;
-    }
-
-    public Integer getDist() {
-        return dist;
-    }
-
-    public void setDist(Integer dist) {
-        this.dist = dist;
     }
 }
