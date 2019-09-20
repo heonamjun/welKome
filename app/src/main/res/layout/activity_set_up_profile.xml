@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.sktrip.Login.SetUpProfile">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/app_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000FF"
+        app:title="Set Up Profile" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="310dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Hey! We need few details from you before you start sharing on Momento" />
+
+    <EditText
+        android:id="@+id/idForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/pwForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="Date of Birth"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/pwConfirmForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="Gender"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/nameForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:ems="10"
+        android:hint="Job"
+        android:inputType="textPassword" />
+
+    <ImageButton
+        android:id="@+id/getSetGo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#000000FF"
+        app:srcCompat="@drawable/getsetgo" />
+</LinearLayout>
