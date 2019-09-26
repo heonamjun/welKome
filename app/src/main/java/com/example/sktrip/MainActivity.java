@@ -233,8 +233,27 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                 .commit();
     }
 
-    @Override
-    public void onclick(String value) {
 
+    //tmap 으로 데이터 보내기
+    @Override
+    public void onclick1(@NonNull String title, @NonNull Double mapx, @NonNull Double mapy) {
+
+        final Fragment fragmentMenu3= new Fragment_menu3();
+        Bundle args = new Bundle();
+
+        if (title != null)
+            args.putString("title", title);
+
+        if (mapx != null)
+            args.putDouble("mapx", mapx);
+        if (mapy != null)
+            args.putDouble("mapy", mapy);
+        fragmentMenu3.setArguments(args);
+/*
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.frame_layout, fragmentMenu3, TOURINFO)
+                .addToBackStack(null)
+                .commit();*/
     }
+
 }

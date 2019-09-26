@@ -22,5 +22,6 @@ public interface OnItemClick {
                  Integer sigungucode,
                  String tel);
 
-    void onclick(String value);
+    void onclick1(String title,Double mapx,Double mapy);
+
 }
