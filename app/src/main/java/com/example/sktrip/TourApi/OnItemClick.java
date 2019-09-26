@@ -20,7 +20,10 @@ public interface OnItemClick {
                  Long modifiedtime,
                  Integer readcount,
                  Integer sigungucode,
-                 String tel);
+                 String tel,
+                 String zipcode);
 
     void onclick(String value);
+
+    void onclick(String originimgurl, String serialnum, String smallimageurl);
 }

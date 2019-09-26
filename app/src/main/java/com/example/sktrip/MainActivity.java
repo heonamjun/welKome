@@ -1,12 +1,12 @@
 package com.example.sktrip;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -17,11 +17,11 @@ import com.example.sktrip.Fragment.Fragment_menu3;
 import com.example.sktrip.Fragment.Fragment_menu4;
 import com.example.sktrip.TourApi.OnItemClick;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements OnItemClick {
-
-    public static FragmentTransaction ft;
-    public static FragmentManager fm;
 
     public FragmentManager manager = getSupportFragmentManager();
     public FragmentTransaction transaction;
@@ -33,28 +33,32 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     public static final String MENU4 = "MENU4";
     public static final String TOURINFO = "TOURINFO";
 
-
+    List<Fragment> fragmentList;
     final Fragment fragmentMenu1 = new Fragment_menu1();
     final Fragment fragmentMenu2 = new Fragment_menu2();
     final Fragment fragmentMenu3 = new Fragment_menu3();
     final Fragment fragmentMenu4 = new Fragment_menu4();
 
-
     public BottomNavigationView navigation;
+    private boolean BackButtomCheck = false;
+    private boolean LastIndexCheck = false;
+    private int lastindex;
     private int mselecteditem;
+
+    private MenuItem selecteditem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fm = getSupportFragmentManager();
 
+        initFragment();
 
         /**
          BottomNavigationView 지정 (리스너)
          */
-
         navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -64,17 +68,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
             }
         });
 
-
-        MenuItem selecteditem;
-
         if (savedInstanceState != null) {
             mselecteditem = savedInstanceState.getInt(SELECTED_ITEM, 0);
             selecteditem = navigation.getMenu().findItem(mselecteditem);
         } else {
             selecteditem = navigation.getMenu().getItem(0);
         }
-        SelectedFragment(selecteditem);
 
+        SelectedFragment(selecteditem);
     }
 
 
@@ -88,61 +89,99 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     }
 
 
-    /*
-        뒤로가기 버튼 눌렀을 때 추천하기로 이동
+    /**
+     * 뒤로가기 버튼 눌렀을때 추천하기로 바로 이동
+     * 추후 업데이트 예정
      */
     @Override
     public void onBackPressed() {
         MenuItem homeItem = navigation.getMenu().getItem(0);
-
-        if (mselecteditem != homeItem.getItemId()) {
+        if (BackButtomCheck) {
+            Fragment fragment = manager.findFragmentByTag(TOURINFO);
+            transaction = manager.beginTransaction();
+            transaction.remove(fragment).commit();
+            BackButtomCheck = false;
+        } else if (mselecteditem != homeItem.getItemId()) {
             SelectedFragment(homeItem);
-
-            // Select home item
             navigation.setSelectedItemId(homeItem.getItemId());
         } else {
             super.onBackPressed();
         }
     }
 
+
+    /**
+     * Bottomnavigation 눌렀을 때 해당 프래그먼트 화면 전환
+     * 첫화면 menu1으로 이동
+     *
+     * @param item
+     */
     public void SelectedFragment(MenuItem item) {
-        Fragment frag = null;
         item.setChecked(true);
         switch (item.getItemId()) {
             case R.id.navigation_menu1:
-                replaceFragment(fragmentMenu1, MENU1);
+                CurrentFragment(0);
+//                replaceFragment(fragmentMenu1, MENU1, 0);
                 break;
 
             case R.id.navigation_menu2:
-                replaceFragment(fragmentMenu2, MENU2);
+                CurrentFragment(1);
+//                replaceFragment(fragmentMenu2, MENU2, 1);
                 break;
 
             case R.id.navigation_menu3:
-                replaceFragment(fragmentMenu3, MENU3);
+                CurrentFragment(2);
+//                replaceFragment(fragmentMenu3, MENU3, 2);
                 break;
 
             case R.id.navigation_menu4:
-                replaceFragment(fragmentMenu4, MENU4);
+                CurrentFragment(3);
+//                replaceFragment(fragmentMenu4, MENU4, 3);
+                break;
+
+            default:
                 break;
         }
-
         mselecteditem = item.getItemId();
-
-        /*
-            첫화면 설정
-         */
-        if (frag != null) {
-            transaction = manager.beginTransaction();
-            transaction.replace(R.id.frame_layout, fragmentMenu1, MENU1).commit();
-        }
     }
 
-    public void replaceFragment(Fragment fragment, String tag) {
-        transaction = manager.beginTransaction();
-        transaction.replace(R.id.frame_layout, fragment, tag)
-                .addToBackStack(null)
-                .commit();
 
+    public void initFragment() {
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new Fragment_menu1());
+        fragmentList.add(new Fragment_menu2());
+        fragmentList.add(new Fragment_menu3());
+        fragmentList.add(new Fragment_menu4());
+    }
+
+
+    public void CurrentFragment(int position) {
+        transaction = getSupportFragmentManager().beginTransaction();
+        Fragment currentFragment = fragmentList.get(position);
+        if (LastIndexCheck) {
+            Fragment lastFragment = fragmentList.get(lastindex);
+            transaction.hide(lastFragment);
+        }
+        lastindex = position;
+        LastIndexCheck = true;
+
+        if(!currentFragment.isAdded()){
+            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+            transaction.add(R.id.frame_layout,currentFragment);
+        }
+
+        transaction.show(currentFragment);
+        transaction.commitAllowingStateLoss();
+
+    }
+
+    public void replaceFragment(Fragment fragment, String tag, int position) {
+        transaction = getSupportFragmentManager().beginTransaction();
+//        boolean fragmentPopped = manager.popBackStackImmediate(tag, 0);
+        transaction.replace(R.id.frame_layout, fragment, tag);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.addToBackStack(tag);
+        transaction.commit();
     }
 
 
@@ -170,7 +209,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                         @NonNull Long modifiedtime,
                         @NonNull Integer readcount,
                         @NonNull Integer sigungucode,
-                        @NonNull String tel) {
+                        @NonNull String tel,
+                        @NonNull String zipcode) {
 
 
         Log.d("MainActivity_Title", title); // 확인
@@ -223,18 +263,26 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
             args.putInt("titsigungucodele", sigungucode);
         if (tel != null)
             args.putString("tel", tel);
-
+        if (zipcode != null)
+            args.putString("zipcode", zipcode);
 
         fragmentMenu2TourInfo.setArguments(args);
 
         transaction = manager.beginTransaction();
         transaction.add(R.id.frame_layout, fragmentMenu2TourInfo, TOURINFO)
-                .addToBackStack(null)
+                .addToBackStack(TOURINFO)
                 .commit();
+
+        BackButtomCheck = true;
     }
 
     @Override
     public void onclick(String value) {
+
+    }
+
+    @Override
+    public void onclick(String originimgurl, String serialnum, String smallimageurl) {
 
     }
 }

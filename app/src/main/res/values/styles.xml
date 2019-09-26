@@ -21,7 +21,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
-<!---->
+    <!---->
 
     <style name="TextComponent"/>
 
@@ -38,7 +38,7 @@
     </style>
 
 
-<!--    -->
+    <!--    -->
 
     <style name="TextAppearance" parent="TextAppearance.AppCompat"/>
     <style name="TextAppearance.Header">
@@ -54,7 +54,7 @@
     </style>
 
 
-<!--    -->
+    <!--    -->
 
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"/>
     <style name="CollapsingTextAppearance.Inverse" >
@@ -62,10 +62,20 @@
     </style>
 
 
-<!--    -->
+    <!--    -->
 
     <style name="ToolBarWithNavigationBack">
         <item name="navigationIcon">@drawable/abc_ic_ab_back_material</item>
+    </style>
+
+    <!--    -->
+
+    <string name="simple_view_behavior">com.zoonref.viewbehavior.SimpleViewBehavior</string>
+    <string name="animation_view_behavior">com.zoonref.viewbehavior.AnimationViewBehavior</string>
+
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
     </style>
 
 </resources>
