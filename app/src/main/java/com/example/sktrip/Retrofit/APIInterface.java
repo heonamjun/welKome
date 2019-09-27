@@ -25,4 +25,6 @@ public interface APIInterface {
 
 
 
+    @GET("rating/load")
+    Call<List<ratingData>> RationDataLoad(@Query("id") String id,  @Query("contentid") int contentid);
 }

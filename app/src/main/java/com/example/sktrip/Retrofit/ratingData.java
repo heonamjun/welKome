@@ -14,6 +14,18 @@ public class ratingData {
     @SerializedName("contentid")
     @Expose
     private Integer contentid;
+    @SerializedName("count(*)")
+    @Expose
+    private Integer count;
+
+
+    public Integer getCheck() {
+        return count;
+    }
+
+    public void setCheck(Integer count) {
+        this.count = count;
+    }
 
     public String getId() {
         return id;
