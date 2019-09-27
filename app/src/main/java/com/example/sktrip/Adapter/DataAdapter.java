@@ -1,6 +1,7 @@
 package com.example.sktrip.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,8 +26,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.sktrip.Login.signIn.staticID;
-
 
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData;
@@ -34,6 +33,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private int layoutId;
     private OnItemClick mCallback;
+
+
 
 
     /**
@@ -81,7 +82,11 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             ((GradeTour) holder).TourRating.setStepSize((float) 1);
 
-            
+            final SharedPreferences preferences = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
+
+
+
+
 
             // Rating change + DB insert
             ((GradeTour) holder).TourRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -97,7 +102,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     // 3. get userID
 
-                    String userID = staticID;
+                    String userID = preferences.getString("inputId",null);
 
                     // 4. Connection
                     APIInterface apiInterface;
