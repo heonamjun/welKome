@@ -23,8 +23,10 @@ public interface APIInterface {
     @GET("rating/load2")
     Call<List<ratingData>> doRatingDataLoad2(@Query("id") String id, @Query("contentid") int contentid);
 
-
-
     @GET("rating/load")
     Call<List<ratingData>> RationDataLoad(@Query("id") String id,  @Query("contentid") int contentid);
+
+    @GET("rating/count")
+    Call<List<ratingData>> RatingDataCount(@Query("id") String id,  @Query("contentid") int contentid);
 }
+

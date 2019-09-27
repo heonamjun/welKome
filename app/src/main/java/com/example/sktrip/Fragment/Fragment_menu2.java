@@ -10,9 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.sktrip.Adapter.TabPagerAdapter;
 import com.example.sktrip.R;
+import com.example.sktrip.Retrofit.APIClient;
+import com.example.sktrip.Retrofit.APIInterface;
 
 public class Fragment_menu2 extends Fragment {
 
@@ -21,6 +24,7 @@ public class Fragment_menu2 extends Fragment {
     private TabLayout tabLayout;
     private TabPagerAdapter tabPagerAdapter;
     private ViewPager viewPager;
+    private TextView TourGradeCount;
 
 
     public Fragment_menu2() {
@@ -47,10 +51,17 @@ public class Fragment_menu2 extends Fragment {
         toolbar = (Toolbar) view.findViewById(R.id.TourToolbar);
         tabLayout = (TabLayout) view.findViewById(R.id.TourTopLayout);
         viewPager = (ViewPager) view.findViewById(R.id.vpPager);
+        TourGradeCount = (TextView) view.findViewById(R.id.TourGradeCount);
 
 //        sectionPageAdapter = new SectionPageAdapter(getChildFragmentManager());
 //        setupViewpager(viewPager);
 //        tabLayout.setupWithViewPager(viewPager);
+
+        APIInterface apiInterface;
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+//        apiInterface.RatingDataCount()
+
+
 
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);

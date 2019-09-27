@@ -3,6 +3,7 @@ package com.example.sktrip.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-
     /**
      * 레이아웃을 만들고 Holder에 저장
      * 뷰 홀더를 생성하고 뷰를 붙여주는 부분
@@ -55,8 +55,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-            return new GradeTour(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+        return new GradeTour(view);
     }
 
     /**
@@ -83,14 +83,12 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             APIInterface apiInterface;
             apiInterface = APIClient.getClient().create(APIInterface.class);
-
-
-           Call<List<ratingData>> call =  apiInterface.RationDataLoad(staticID , GradeTourData.get(position).getContentid());
+            Call<List<ratingData>> call = apiInterface.RationDataLoad(staticID, GradeTourData.get(position).getContentid());
             call.enqueue(new Callback<List<ratingData>>() {
                 @Override
                 public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
-                        int rating = response.body().get(0).getRating();
-                            ((GradeTour) holder).TourRating.setRating(rating);
+                    int rating = response.body().get(0).getRating();
+                    ((GradeTour) holder).TourRating.setRating(rating);
                 }
 
                 @Override
@@ -98,11 +96,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 }
             });
-
-
-
-
-
 
 
             // Rating change + DB insert
@@ -125,7 +118,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     APIInterface apiInterface;
                     apiInterface = APIClient.getClient().create(APIInterface.class);
 
-                    Call<List<ratingData>> call = apiInterface.doRatingDataInsert(userID, userRating, contentid);
+                    Call<List<ratingData>> call = apiInterface.doRatingDataInsert(staticID, userRating, contentid);
 
                     call.enqueue(new Callback<List<ratingData>>() {
                         @Override
@@ -138,8 +131,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         }
                     });
-
-
 
 
                 }
@@ -185,7 +176,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     @Override
     public int getItemCount() {
-            return GradeTourData.size();
+        return GradeTourData.size();
     }
 
 
