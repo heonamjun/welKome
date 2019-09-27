@@ -81,6 +81,27 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             ((GradeTour) holder).TourRating.setStepSize((float) 1);
 
+            APIInterface apiInterface;
+            apiInterface = APIClient.getClient().create(APIInterface.class);
+
+
+           Call<List<ratingData>> call =  apiInterface.RationDataLoad(staticID , GradeTourData.get(position).getContentid());
+            call.enqueue(new Callback<List<ratingData>>() {
+                @Override
+                public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
+                        int rating = response.body().get(0).getRating();
+                            ((GradeTour) holder).TourRating.setRating(rating);
+                }
+
+                @Override
+                public void onFailure(Call<List<ratingData>> call, Throwable t) {
+
+                }
+            });
+
+
+
+
 
 
 
