@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sktrip.Adapter.SectionPageAdapter;
 import com.example.sktrip.Adapter.TabPagerAdapter;
 import com.example.sktrip.R;
 
@@ -22,7 +21,6 @@ public class Fragment_menu2 extends Fragment {
     private TabLayout tabLayout;
     private TabPagerAdapter tabPagerAdapter;
     private ViewPager viewPager;
-    private SectionPageAdapter sectionPageAdapter;
 
 
     public Fragment_menu2() {
@@ -88,12 +86,6 @@ public class Fragment_menu2 extends Fragment {
     }
 
 
-    public void setupViewpager(ViewPager viewPager){
-        sectionPageAdapter.addFragment(new Fragment_menu2_first() , "관광지");
-        sectionPageAdapter.addFragment(new Fragment_menu2_second() , "음식점");
-        sectionPageAdapter.addFragment(new Fragment_menu2_third() , "숙박지");
-        viewPager.setAdapter(sectionPageAdapter);
-    }
 }
 
 

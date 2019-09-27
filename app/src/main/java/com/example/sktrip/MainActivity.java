@@ -10,9 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.sktrip.Fragment.Fragment_menu1;
+import com.example.sktrip.Fragment.Fragment_menu1_first;
 import com.example.sktrip.Fragment.Fragment_menu2;
 import com.example.sktrip.Fragment.Fragment_menu2_TourInfo;
+import com.example.sktrip.Fragment.Fragment_menu2_first;
 import com.example.sktrip.Fragment.Fragment_menu3;
 import com.example.sktrip.Fragment.Fragment_menu4;
 import com.example.sktrip.TourApi.OnItemClick;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements OnItemClick{
+public class MainActivity extends AppCompatActivity implements OnItemClick {
 
     public FragmentManager manager = getSupportFragmentManager();
     public FragmentTransaction transaction;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick{
     public static final String TOURINFO = "TOURINFO";
 
     List<Fragment> fragmentList;
-    final Fragment fragmentMenu1 = new Fragment_menu1();
+    final Fragment fragmentMenu1_first = new Fragment_menu1_first();
     final Fragment fragmentMenu2 = new Fragment_menu2();
     final Fragment fragmentMenu3 = new Fragment_menu3();
     final Fragment fragmentMenu4 = new Fragment_menu4();
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClick{
                 return false;
             }
         });
+
+
+        MenuItem selecteditem;
 
         if (savedInstanceState != null) {
             mselecteditem = savedInstanceState.getInt(SELECTED_ITEM, 0);
@@ -103,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClick{
             BackButtomCheck = false;
         } else if (mselecteditem != homeItem.getItemId()) {
             SelectedFragment(homeItem);
+
+            // Select home item
             navigation.setSelectedItemId(homeItem.getItemId());
         } else {
             super.onBackPressed();
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick{
 
     public void initFragment() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(new Fragment_menu1());
+        fragmentList.add(new Fragment_menu1_first());
         fragmentList.add(new Fragment_menu2());
         fragmentList.add(new Fragment_menu3());
         fragmentList.add(new Fragment_menu4());
@@ -175,13 +181,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClick{
 
     }
 
-    public void replaceFragment(Fragment fragment, String tag, int position) {
-        transaction = getSupportFragmentManager().beginTransaction();
-//        boolean fragmentPopped = manager.popBackStackImmediate(tag, 0);
-        transaction.replace(R.id.frame_layout, fragment, tag);
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        transaction.addToBackStack(tag);
-        transaction.commit();
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).commit();
+
+
     }
 
 
@@ -277,19 +282,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClick{
     }
 
     @Override
-    public void onclick(@NonNull String value) {
+    public void onclick1(@NonNull String title, @NonNull Double mapx, @NonNull Double mapy) {
 
-        final Fragment fragmentMenu2TourInfo = new Fragment_menu2_TourInfo();
-        transaction = manager.beginTransaction();
-        transaction.add(R.id.frame_layout, fragmentMenu2TourInfo, TOURINFO)
-                .addToBackStack(TOURINFO)
-                .commit();
+        final Fragment fragmentMenu3= new Fragment_menu3();
+        Bundle args = new Bundle();
+
     }
 
     @Override
-    public void onclick(String originimgurl, String serialnum, String smallimageurl) {
+    public void onclick2() {
+        final Fragment fragment_menu2_first = new Fragment_menu2_first();
 
+      //  transaction = manager.beginTransaction();
+        //transaction.add(R.id.frame_layout, fragment_menu2_first).commit();
+        replaceFragment(fragment_menu2_first);
+   //     BackButtomCheck = true;
     }
-
-
 }
