@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements OnItemClick {
+public class MainActivity extends AppCompatActivity implements OnItemClick{
 
     public FragmentManager manager = getSupportFragmentManager();
     public FragmentTransaction transaction;
@@ -277,12 +277,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     }
 
     @Override
-    public void onclick(String value) {
+    public void onclick(@NonNull String value) {
 
+        final Fragment fragmentMenu2TourInfo = new Fragment_menu2_TourInfo();
+        transaction = manager.beginTransaction();
+        transaction.add(R.id.frame_layout, fragmentMenu2TourInfo, TOURINFO)
+                .addToBackStack(TOURINFO)
+                .commit();
     }
 
     @Override
     public void onclick(String originimgurl, String serialnum, String smallimageurl) {
 
     }
+
+
 }
