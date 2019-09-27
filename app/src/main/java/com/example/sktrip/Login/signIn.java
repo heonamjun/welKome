@@ -29,9 +29,11 @@ public class signIn extends AppCompatActivity {
 
     ImageButton goToFeed;
     EditText editID, editPW;
-    String userID, userPW="testtesttest", ID,PASSWORD="testtesttest", Name;
+    String userID, userPW = "testtesttest", ID, PASSWORD = "testtesttest", Name;
     String sharedID, sharedPW;
     APIInterface apiInterface;
+
+    public static String staticID;
 
 
     @Override
@@ -39,11 +41,11 @@ public class signIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        Toolbar tb =  findViewById(R.id.app_toolbar);
-        setSupportActionBar(tb) ;
+        Toolbar tb = findViewById(R.id.app_toolbar);
+        setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ActionBar ab = getSupportActionBar() ;
+        ActionBar ab = getSupportActionBar();
 
         goToFeed = findViewById(R.id.goToFeed);
         editID = findViewById(R.id.idForm);
@@ -53,10 +55,12 @@ public class signIn extends AppCompatActivity {
 
         final SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
 
-        sharedID = auto.getString("inputId",null);
-        sharedPW = auto.getString("inputPwd",null);
+        sharedID = auto.getString("inputId", null);
+        sharedPW = auto.getString("inputPwd", null);
 
-        if(sharedID != null && sharedPW != null){
+        if (sharedID != null && sharedPW != null) {
+
+            staticID = auto.getString("inputId",null);
 
             Toast.makeText(getApplicationContext(), "자동 로그인 성공", Toast.LENGTH_LONG).show();
 
@@ -77,26 +81,21 @@ public class signIn extends AppCompatActivity {
                 userPW = editPW.getText().toString();
 
 
-
-
-                Call<List<registerData>> call = apiInterface.doLoginData(userID,userPW,"zz");
+                Call<List<registerData>> call = apiInterface.doLoginData(userID, userPW, "zz");
 
                 call.enqueue(new Callback<List<registerData>>() {
                     @Override
                     public void onResponse(Call<List<registerData>> call, Response<List<registerData>> response) {
 
 
-                        for(registerData data : response.body()){
+                        for (registerData data : response.body()) {
                             ID = data.getId();
                             PASSWORD = data.getPassword();
                             Name = data.getName();
                         }
 
 
-
-
-
-                        if(PASSWORD.equals(userPW)){ // 널 예외처리 귀찮아서 그냥 글자 넣겟음
+                        if (PASSWORD.equals(userPW)) { // 널 예외처리 귀찮아서 그냥 글자 넣겟음
 
                             Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_LONG).show();
 
@@ -109,11 +108,12 @@ public class signIn extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            staticID = auto.getString("inputId",null);
 
                             startActivity(intent);
 
 
-                        }else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "비밀번호가 맞지 않습니다.", Toast.LENGTH_LONG).show();
                         }
 
@@ -126,7 +126,6 @@ public class signIn extends AppCompatActivity {
                         call.cancel();
                     }
                 });
-
 
 
             }

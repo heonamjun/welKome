@@ -17,6 +17,8 @@ public interface APIInterface {
     @GET("sign/idcheck")
     Call<List<registerData>> doIdCheck(@Query("userId") String userId);
 
+    @GET("rating/insert")
+    Call<List<ratingData>> doRatingDataInsert(@Query("id") String id, @Query("rating") int rating, @Query("contentid") int contentid);
 
 
 }
