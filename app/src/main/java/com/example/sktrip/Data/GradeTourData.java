@@ -21,11 +21,13 @@ public class GradeTourData extends RecyclerItem{
     private Integer sigungucode;
     private String tel;
     private String title;
+    private String zipcode;
+
 
     public GradeTourData(String title, String addr1, String addr2, Integer areacode, Integer booktour,
                          String cat1, String cat2, String cat3, Integer contentid, Integer contenttypeid,
                          Long createdtime, String firstimage, String firstimage2, Double mapx, Double mapy,
-                         Integer mlevel, Long modifiedtime, Integer readcount, Integer sigungucode, String tel){
+                         Integer mlevel, Long modifiedtime, Integer readcount, Integer sigungucode, String tel, String zipcode) {
 
         this.title = title;
         this.addr1 = addr1;
@@ -47,9 +49,21 @@ public class GradeTourData extends RecyclerItem{
         this.readcount = readcount;
         this.sigungucode = sigungucode;
         this.tel = tel;
+        this.zipcode = zipcode;
     }
 
+    /**
+     * TourInfoimageData
+     */
+    private String originimgurl;
+    private String serialnum;
+    private String smallimageurl;
 
+    public GradeTourData(String originimgurl, String serialnum, String smallimageurl) {
+        this.originimgurl = originimgurl;
+        this.serialnum = serialnum;
+        this.smallimageurl = smallimageurl;
+    }
 
     public String getAddr1() {
         return addr1;
@@ -209,5 +223,37 @@ public class GradeTourData extends RecyclerItem{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOriginimgurl() {
+        return originimgurl;
+    }
+
+    public void setOriginimgurl(String originimgurl) {
+        this.originimgurl = originimgurl;
+    }
+
+    public String getSerialnum() {
+        return serialnum;
+    }
+
+    public void setSerialnum(String serialnum) {
+        this.serialnum = serialnum;
+    }
+
+    public String getSmallimageurl() {
+        return smallimageurl;
+    }
+
+    public void setSmallimageurl(String smallimageurl) {
+        this.smallimageurl = smallimageurl;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 }

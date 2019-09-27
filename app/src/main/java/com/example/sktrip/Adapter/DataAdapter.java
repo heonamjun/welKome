@@ -11,44 +11,47 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sktrip.Data.GradeTourData;
-import com.example.sktrip.TourApi.OnItemClick;
 import com.example.sktrip.R;
+import com.example.sktrip.TourApi.OnItemClick;
 
 import java.util.ArrayList;
 
 
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<GradeTourData> GradeTourData;
+    private ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData;
+
     private Context context;
     private int layoutId;
     private OnItemClick mCallback;
 
-    /*
-        생성자
+
+    /**
+     * 생성자
      */
-    public DataAdapter(ArrayList<GradeTourData> GradeTourData, Context context, int layoutId, OnItemClick mCallback) {
+    public DataAdapter(ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData, Context context, int layoutId, OnItemClick mCallback) {
         this.GradeTourData = GradeTourData;
         this.context = context;
         this.layoutId = layoutId;
         this.mCallback = mCallback;
     }
 
-    /*
-        레이아웃을 만들고 Holder에 저장
-        뷰 홀더를 생성하고 뷰를 붙여주는 부분
+
+
+    /**
+     * 레이아웃을 만들고 Holder에 저장
+     * 뷰 홀더를 생성하고 뷰를 붙여주는 부분
      */
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-        return new GradeTour(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+            return new GradeTour(view);
     }
 
-    /*
-        넘겨받은 데이터를 화면에 출력
-        재활용 되는 뷰가 호출하여 실행되는 메소드
-        뷰홀더를 전달하고 어댑터는 position의 데이터를 결합
+    /**
+     * 넘겨받은 데이터를 화면에 출력
+     * 재활용 되는 뷰가 호출하여 실행되는 메소드
+     * 뷰홀더를 전달하고 어댑터는 position의 데이터를 결합
      */
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
@@ -59,8 +62,9 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof GradeTour) {
             ((GradeTour) holder).TourTitle.setText(GradeTourData.get(position).getTitle());
             ((GradeTour) holder).TourAdd1.setText(GradeTourData.get(position).getAddr1());
+
             Glide.with(context).load(GradeTourData.get(position)
-                    .getFirstimage())
+                    .getFirstimage2())
                     .into(((GradeTour) holder).TourImage);
 
             ((GradeTour) holder).TourRating.setStepSize((float) 0.5);
@@ -72,8 +76,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
 
 
-            /*
-                아이템 클릭 시 MainActivity 로 전송
+            /**
+             아이템 클릭 시 MainActivity 로 전송
              */
             ((GradeTour) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,24 +102,26 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             GradeTourData.get(position).getModifiedtime(),
                             GradeTourData.get(position).getReadcount(),
                             GradeTourData.get(position).getSigungucode(),
-                            GradeTourData.get(position).getTel());
+                            GradeTourData.get(position).getTel(),
+                            GradeTourData.get(position).getZipcode());
                 }
             });
         }
     }
 
 
-    /*
-       데이터 수 반환
+    /**
+     * 데이터 수 반환
      */
     @Override
     public int getItemCount() {
-        return GradeTourData.size();
+            return GradeTourData.size();
     }
 
 
-    /*
-       레이아웃 객체화
+    /**
+     * GradeTour
+     * 레이아웃 객체화
      */
     public static class GradeTour extends RecyclerView.ViewHolder {
         private ImageView TourImage;
@@ -131,6 +137,4 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TourRating = itemView.findViewById(R.id.TourRating);
         }
     }
-
-
 }

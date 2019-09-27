@@ -25,7 +25,7 @@ public interface TourApiService {
 
 
     //지역 코드 조회
-    //평균적으로
+    //평균적으로  ok
     @GET("areaCode?ServiceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&_type=json")
     Call<DataRES> getareaCode(@Query("areaCode") int areaCode,
                               @Query("numOfRows") int numOfRows,
@@ -97,7 +97,7 @@ public interface TourApiService {
                                        @Query("numOfRows") int numOfRows,
                                        @Query("pageNo") int pageNo);
 
-    //키워드 검색 조회
+    //키워드 검색 조회 ok
     @GET("searchKeyword?ServiceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&_type=json")
     Call<DataRES> getsearchKeyword(@Query("listYN") String listYN,
                                    @Query("arrange") String arrange,
@@ -117,7 +117,7 @@ public interface TourApiService {
                                     @Query("numOfRows") int numOfRows,
                                     @Query("pageNo") int pageNo);
 
-    //숙박 정보 조회
+    //숙박 정보 조회 ok
     @GET("searchStay?ServiceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&_type=json")
     Call<DataRES> getsearchStay(@Query("listYN") String listYN,
                                 @Query("arrange") String arrange,
@@ -125,25 +125,19 @@ public interface TourApiService {
                                 @Query("numOfRows") int numOfRows,
                                 @Query("pageNo") int pageNo);
 
-    //공통정보 조회
-    @GET("detailCommon?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&_type=json")
-    Call<DataRES> getdetailCommon(@Query("contentId") int contentId,
-                                  @Query("numOfRows") int numOfRows,
-                                  @Query("pageNo") int pageNo);
-
-    @GET("detailCommon?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&contentid=1115042&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&_type=json")
-    Call<DataRES> getdetailCommon(@Query("numOfRows") int numOfRows,
-                                  @Query("pageNo") int pageNo);
-
-    @GET("detailCommon?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=AppTest&contentId=126508&defaultYN=Y&firstImageYN=N&areacodeYN=N&catcodeYN=N&addrinfoYN=N&mapinfoYN=N&overviewYN=Y&_type=json")
-    Call<DataRES> getdetailCommon();
+    //공통정보 조회 ok
+    @GET("detailCommon?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=N&catcodeYN=N&addrinfoYN=N&mapinfoYN=N&overviewYN=Y&_type=json")
+    Call<DataRES> getdetailCommon(@Query("contentId") int contentId);
 
     //소개 정보 조회
     @GET("detailIntro?ServiceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&_type=json")
     Call<DataRES> getdetailIntro(@Query("contentId") int contentId,
-                                 @Query("contentTypeId") int contentTypeId,
                                  @Query("numOfRows") int numOfRows,
                                  @Query("pageNo") int pageNo);
+
+    @GET("detailIntro?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&contentId=1118680&contentTypeId=15&_type=json")
+    Call<DataRES> getdetailIntro();
+
 
     //반복 정보 조회
     @GET("detailInfo?ServiceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&_type=json")
@@ -152,7 +146,7 @@ public interface TourApiService {
                                 @Query("numOfRows") int numOfRows,
                                 @Query("pageNo") int pageNo);
 
-    //이미지 정보 조회
+    //이미지 정보 조회 ok
     @GET("detailImage?ServiceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&MobileOS=AND&MobileApp=AppTest&_type=json")
     Call<DataRES> getdetailImage(@Query("contentId") int contentId,
                                  @Query("imageYN") String imageYN,

@@ -1,6 +1,7 @@
 package com.example.sktrip.Fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,32 +11,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.example.sktrip.Adapter.TabPagerAdapter;
 import com.example.sktrip.R;
 
 public class Fragment_menu2 extends Fragment {
 
+    private static final String MENU2 = "MENU2";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private TabPagerAdapter tabPagerAdapter;
     private ViewPager viewPager;
 
+
     public Fragment_menu2() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment
-     *
-     * @return A new instance of fragment ViewPagerFragment.
-     */
-
-    public static Fragment_menu2 newInstance() {
-        Fragment_menu2 fragment = new Fragment_menu2();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,14 +34,23 @@ public class Fragment_menu2 extends Fragment {
         setRetainInstance(true);
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu2, container, false);
 
+
         toolbar = (Toolbar) view.findViewById(R.id.TourToolbar);
         tabLayout = (TabLayout) view.findViewById(R.id.TourTopLayout);
         viewPager = (ViewPager) view.findViewById(R.id.vpPager);
+
+//        sectionPageAdapter = new SectionPageAdapter(getChildFragmentManager());
+//        setupViewpager(viewPager);
+//        tabLayout.setupWithViewPager(viewPager);
 
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
@@ -78,12 +78,14 @@ public class Fragment_menu2 extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+
             }
         });
 
         return view;
     }
+
+
 }
 
 

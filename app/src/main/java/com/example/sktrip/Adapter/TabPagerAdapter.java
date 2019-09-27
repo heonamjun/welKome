@@ -3,15 +3,19 @@ package com.example.sktrip.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import com.example.sktrip.Fragment.Fragment_menu2_first;
 import com.example.sktrip.Fragment.Fragment_menu2_second;
 import com.example.sktrip.Fragment.Fragment_menu2_third;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TabPagerAdapter extends FragmentStatePagerAdapter {
 
-    // Count number of tabs
     private int tabCount;
+
 
     public TabPagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
