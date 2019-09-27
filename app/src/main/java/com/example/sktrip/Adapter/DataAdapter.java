@@ -82,7 +82,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((GradeTour) holder).TourRating.setStepSize((float) 1);
 
 
-            
+
 
             // Rating change + DB insert
             ((GradeTour) holder).TourRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
