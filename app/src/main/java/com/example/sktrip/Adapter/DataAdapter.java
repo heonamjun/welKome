@@ -62,7 +62,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (holder instanceof GradeTour) {
             ((GradeTour) holder).TourTitle.setText(GradeTourData.get(position).getTitle());
             ((GradeTour) holder).TourAdd1.setText(GradeTourData.get(position).getAddr1());
-
             Glide.with(context).load(GradeTourData.get(position)
                     .getFirstimage2())
                     .into(((GradeTour) holder).TourImage);
@@ -75,10 +74,10 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
 
-
             /**
              아이템 클릭 시 MainActivity 로 전송
              */
+
             ((GradeTour) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

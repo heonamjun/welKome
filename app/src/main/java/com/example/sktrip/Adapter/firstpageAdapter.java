@@ -97,6 +97,7 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                             GradeTourData.get(position).getSigungucode(),
                             GradeTourData.get(position).getTel(),
                             GradeTourData.get(position).getZipcode());
+
                 }
             });
         }

@@ -323,4 +323,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         replaceFragment(fragment_menu2_first);
    //     BackButtomCheck = true;
     }
+
+    @Override
+    public void onClicked(String value) {
+
+    }
 }

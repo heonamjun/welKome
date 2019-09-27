@@ -1,9 +1,11 @@
 package com.example.sktrip.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sktrip.Activity.CameraActivity;
 import com.example.sktrip.Adapter.TourInfoImageAdapter;
 import com.example.sktrip.Data.TourInfoImageData;
 import com.example.sktrip.R;
@@ -35,6 +38,7 @@ public class Fragment_menu2_TourInfo extends Fragment {
 
     private RecyclerView recyclerView;
     private TourInfoImageAdapter adapter;
+    private FloatingActionButton fabCamera;
 
     Toolbar toolbar;
     TextView TourInfoTitle;
@@ -135,7 +139,14 @@ public class Fragment_menu2_TourInfo extends Fragment {
 
             }
         }
-
+        fabCamera=(FloatingActionButton)view.findViewById(R.id.flexible_example_fab);
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CameraActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         collapsingToolbarLayout = view.findViewById(R.id.TourInfo_CollapsingToolbarLayout);
         // 상단바

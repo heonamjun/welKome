@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "232494421068",
+    "firebase_url": "https://piko-mobile.firebaseio.com",
+    "project_id": "piko-mobile",
+    "storage_bucket": "piko-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232494421068:android:6584c30ca4b18f8f",
+        "android_client_info": {
+          "package_name": "com.example.pikoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232494421068-0c89ud7de275kvb7737b5ka95c6ls195.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pikoproject",
+            "certificate_hash": "8770ac11f15f3f781e3d0faac78119f1d4ef1691"
+          }
+        },
+        {
+          "client_id": "232494421068-i1ag8dnhoh2fjh7oq561s9q705rfrga5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM4se4zD4reIkJmomsFJ0Aatzl0mPzVzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232494421068-i1ag8dnhoh2fjh7oq561s9q705rfrga5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232494421068:android:82b9ee37580573069ed0e9",
+        "android_client_info": {
+          "package_name": "com.example.sktrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232494421068-i1ag8dnhoh2fjh7oq561s9q705rfrga5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM4se4zD4reIkJmomsFJ0Aatzl0mPzVzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232494421068-i1ag8dnhoh2fjh7oq561s9q705rfrga5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

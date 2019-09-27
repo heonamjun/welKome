@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -152,7 +153,10 @@ public class Fragment_menu1_all_list extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.menu2_first_rv);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.menu2_first_sr);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager gridLayoutManager
+                = new GridLayoutManager(getContext(),2);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(gridLayoutManager);
 
     }
 

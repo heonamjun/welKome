@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.sktrip.Activity.CameraActivity;
 import com.example.sktrip.Activity.TourAll;
 import com.example.sktrip.Adapter.DataAdapter;
 import com.example.sktrip.Adapter.firstpageAdapter;
@@ -75,7 +76,12 @@ public class Fragment_menu1_first extends Fragment {
                 System.out.println("잘눌려요");
                Toast.makeText(getContext(),"tqtq",Toast.LENGTH_LONG).show();
 //            ((MainActivity)getActivity()).replaceFragment(Fragment_menu2_third.newInstance());
-
+                final Fragment fragment_menu1_second = new Fragment_menu1_second();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, fragment_menu1_second);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
             }
         });
@@ -87,6 +93,8 @@ public class Fragment_menu1_first extends Fragment {
                 System.out.println("잘눌려요");
                 Toast.makeText(getContext(),"클릭",Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(view.getContext(), CameraActivity.class);
+                view.getContext().startActivity(intent);
                 final Fragment fragment_menu1_all_list = new Fragment_menu1_all_list();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

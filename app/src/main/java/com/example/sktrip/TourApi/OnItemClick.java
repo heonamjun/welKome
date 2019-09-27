@@ -25,6 +25,6 @@ public interface OnItemClick {
 
     void onclick1(String title,Double mapx,Double mapy);
     void onclick2();
-
+    void onClicked(String value);
 
 }
