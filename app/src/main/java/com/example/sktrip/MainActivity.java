@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         initFragment();
+
 
         /**
          BottomNavigationView 지정 (리스너)

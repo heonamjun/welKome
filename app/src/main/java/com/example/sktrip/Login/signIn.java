@@ -1,6 +1,8 @@
 package com.example.sktrip.Login;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,8 @@ public class signIn extends AppCompatActivity {
 
     ImageButton goToFeed;
     EditText editID, editPW;
-    String userID, userPW="asdfdsagshfhfgfgf", ID,PASSWORD="asdfsdfsdgsdafsdaf", Name;
+    String userID, userPW="testtesttest", ID,PASSWORD="testtesttest", Name;
+    String sharedID, sharedPW;
     APIInterface apiInterface;
 
 
@@ -48,12 +51,33 @@ public class signIn extends AppCompatActivity {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
+        final SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+
+        sharedID = auto.getString("inputId",null);
+        sharedPW = auto.getString("inputPwd",null);
+
+        if(sharedID != null && sharedPW != null){
+
+            Toast.makeText(getApplicationContext(), "자동 로그인 성공", Toast.LENGTH_LONG).show();
+
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent);
+
+        }
+
         goToFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 userID = editID.getText().toString();
                 userPW = editPW.getText().toString();
+
+
+
 
                 Call<List<registerData>> call = apiInterface.doLoginData(userID,userPW,"zz");
 
@@ -70,13 +94,24 @@ public class signIn extends AppCompatActivity {
 
 
 
+
+
                         if(PASSWORD.equals(userPW)){ // 널 예외처리 귀찮아서 그냥 글자 넣겟음
 
                             Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_LONG).show();
 
+                            SharedPreferences.Editor autoLogin = auto.edit();
+                            autoLogin.putString("inputId", ID);
+                            autoLogin.putString("inputPwd", PASSWORD);
+
+                            autoLogin.commit();
+
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                             startActivity(intent);
-                            finish();
+
 
                         }else{
                             Toast.makeText(getApplicationContext(), "비밀번호가 맞지 않습니다.", Toast.LENGTH_LONG).show();

@@ -14,6 +14,9 @@ public interface APIInterface {
     @GET("sign/login")
     Call<List<registerData>> doLoginData(@Query("userId") String userId, @Query("userPw") String userPw, @Query("userName") String userName);
 
+    @GET("sign/idcheck")
+    Call<List<registerData>> doIdCheck(@Query("userId") String userId);
+
 
 
 }
