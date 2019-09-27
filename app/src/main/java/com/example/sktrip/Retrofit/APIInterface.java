@@ -20,6 +20,10 @@ public interface APIInterface {
     @GET("rating/insert")
     Call<List<ratingData>> doRatingDataInsert(@Query("id") String id, @Query("rating") int rating, @Query("contentid") int contentid);
 
+    @GET("rating/load2")
+    Call<List<ratingData>> doRatingDataLoad2(@Query("id") String id, @Query("contentid") int contentid);
+
+
 
     @GET("rating/load")
     Call<List<ratingData>> RationDataLoad(@Query("id") String id,  @Query("contentid") int contentid);
