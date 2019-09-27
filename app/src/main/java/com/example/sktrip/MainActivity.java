@@ -293,9 +293,5 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     public void onclick2() {
         final Fragment fragment_menu2_first = new Fragment_menu2_first();
 
-      //  transaction = manager.beginTransaction();
-        //transaction.add(R.id.frame_layout, fragment_menu2_first).commit();
-        replaceFragment(fragment_menu2_first);
-   //     BackButtomCheck = true;
     }
 }

@@ -9,12 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.sktrip.R;
+import com.example.sktrip.Retrofit.APIClient;
+import com.example.sktrip.Retrofit.APIInterface;
+import com.example.sktrip.Retrofit.ratingData;
 import com.example.sktrip.TourApi.OnItemClick;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.sktrip.Login.signIn.staticID;
 
 
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -63,15 +74,53 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((GradeTour) holder).TourTitle.setText(GradeTourData.get(position).getTitle());
             ((GradeTour) holder).TourAdd1.setText(GradeTourData.get(position).getAddr1());
 
+
             Glide.with(context).load(GradeTourData.get(position)
                     .getFirstimage2())
                     .into(((GradeTour) holder).TourImage);
 
-            ((GradeTour) holder).TourRating.setStepSize((float) 0.5);
+            ((GradeTour) holder).TourRating.setStepSize((float) 1);
+
+
+
+
+            // Rating change + DB insert
             ((GradeTour) holder).TourRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    String grade = String.valueOf(rating);
+
+                    // 1. contentid load
+                    int contentid = GradeTourData.get(position).getContentid();
+
+                    // 2. get rating
+
+                    int userRating = (int) ratingBar.getRating();
+
+                    // 3. get userID
+
+                    String userID = staticID;
+
+                    // 4. Connection
+                    APIInterface apiInterface;
+                    apiInterface = APIClient.getClient().create(APIInterface.class);
+
+                    Call<List<ratingData>> call = apiInterface.doRatingDataInsert(userID, userRating, contentid);
+
+                    call.enqueue(new Callback<List<ratingData>>() {
+                        @Override
+                        public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
+                            Toast.makeText(context, "평점 완료", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<ratingData>> call, Throwable t) {
+
+                        }
+                    });
+
+
+
+
                 }
             });
 
@@ -135,6 +184,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TourTitle = itemView.findViewById(R.id.TourTitle);
             TourAdd1 = itemView.findViewById(R.id.TourAdd1);
             TourRating = itemView.findViewById(R.id.TourRating);
+
         }
     }
 }
