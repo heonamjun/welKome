@@ -1,10 +1,6 @@
 package com.example.sktrip.Data;
 
-public class GradeTourData {
-
-    /**
-     * GradeTourData
-     */
+public class GradeTourData extends RecyclerItem{
     private String addr1;
     private String addr2;
     private Integer areacode;

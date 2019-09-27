@@ -23,7 +23,8 @@ public interface OnItemClick {
                  String tel,
                  String zipcode);
 
-    void onclick(String value);
+    void onclick1(String title,Double mapx,Double mapy);
+    void onclick2();
 
-    void onclick(String originimgurl, String serialnum, String smallimageurl);
+
 }
