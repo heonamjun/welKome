@@ -38,10 +38,10 @@ public class Fragment_menu2_TourInfo extends Fragment {
 
     Toolbar toolbar;
     TextView TourInfoTitle;
-    TextView TourInfoContents;
-    TextView TourInfoContents2;
     TextView TourInfoOverview;
     TextView TourInfoHomepage;
+    TextView TourInfo_contents2;
+    TextView TourInfo_contents;
     ImageView TourInfoFirstImage;
     LinearLayout TourInfoLayout;
 
@@ -138,21 +138,13 @@ public class Fragment_menu2_TourInfo extends Fragment {
 
 
         collapsingToolbarLayout = view.findViewById(R.id.TourInfo_CollapsingToolbarLayout);
-        // 상단바
         toolbar = view.findViewById(R.id.TourInfo_Toolbar);
-        // 타이틀
         TourInfoTitle = view.findViewById(R.id.TourInfo_Title2);
-        // 상단바 이미지
         TourInfoFirstImage = view.findViewById(R.id.TourInfo_firstimage);
-        // 제목
-        TourInfoContents = view.findViewById(R.id.TourInfo_contents);
-        // 우편번호 , 전화번호명 , 전화번호
-        TourInfoContents2 = view.findViewById(R.id.TourInfo_contents2);
-        // 개요
+        TourInfo_contents = view.findViewById(R.id.TourInfo_contents);
+        TourInfo_contents2 = view.findViewById(R.id.TourInfo_contents2);
         TourInfoOverview = view.findViewById(R.id.TourInfo_overview);
-        // 관련 홈페이지
         TourInfoHomepage = view.findViewById(R.id.TourInfo_homepage);
-
         TourInfoLayout = view.findViewById(R.id.TourInfo_layout);
 
 
@@ -168,28 +160,7 @@ public class Fragment_menu2_TourInfo extends Fragment {
 
 
         collapsingToolbarLayout.setTitleEnabled(false);
-        toolbar.setTitle(title);
-        TourInfoTitle.setText(title);
 
-        /**
-         * 상단바의 이미지
-         */
-        Glide.with(getActivity())
-                .load(firstimage)
-                .into(TourInfoFirstImage);
-
-        /**
-         상세정보 제공
-         */
-        String TourContents = "";
-        if (zipcode != null)
-            TourContents += "우편번호 : " + zipcode + "\n";
-        if (addr1 != null)
-            TourContents += "주소 : " + addr1 + "\n";
-        if (tel != null)
-            TourContents += "tel : " + tel + "\n";
-
-        TourInfoContents.setText(TourContents);
 
         //공통정보 조회 조회 및 출력
         TourInfoHO();
@@ -228,16 +199,37 @@ public class Fragment_menu2_TourInfo extends Fragment {
                     } catch (Exception e) {
                     }
 
+                    String contents = "";
+
+                    if (Body.getResponse().getBody().getItems().getItem().get(0).getTitle() != null) {
+                        String title = Body.getResponse().getBody().getItems().getItem().get(0).getTitle() + "\n";
+                        toolbar.setTitle(title);
+                        TourInfoTitle.setText(title);
+                    }
+
+                    if (Body.getResponse().getBody().getItems().getItem().get(0).getFirstimage() != null) {
+                        Glide.with(getActivity())
+                                .load(ChageHttps(Body.getResponse().getBody().getItems().getItem().get(0).getFirstimage()))
+                                .into(TourInfoFirstImage);
+                    }
+
+                    if (Body.getResponse().getBody().getItems().getItem().get(0).getZipcode() != null) {
+                        contents += "우편번호 : " + Body.getResponse().getBody().getItems().getItem().get(0).getZipcode() + "\n";
+                    }
+
+                    if (Body.getResponse().getBody().getItems().getItem().get(0).getAddr1() != null) {
+                        contents += "주소 : " + Body.getResponse().getBody().getItems().getItem().get(0).getAddr1() + "\n";
+                    }
+
                     if (Body.getResponse().getBody().getItems().getItem().get(0).getTelname() != null) {
-                        String Telname = "전화명 : " + Body.getResponse().getBody().getItems().getItem().get(0).getTelname() + "\n";
-                        TourInfoContents2.setText(Telname);
+                        contents += "전화명 : " + Body.getResponse().getBody().getItems().getItem().get(0).getTelname() + "\n";
                     }
 
                     if (Body.getResponse().getBody().getItems().getItem().get(0).getTel() != null) {
-                        String Tel = "전화 : " + Body.getResponse().getBody().getItems().getItem().get(0).getTel() + "\n";
-                        TourInfoContents2.setText(Tel);
+                        contents += "전화 : " + Body.getResponse().getBody().getItems().getItem().get(0).getTel() + "\n";
                     }
 
+                    TourInfo_contents.setText(contents);
 
                     if (Body.getResponse().getBody().getItems().getItem().get(0).getOverview() != null) {
                         String Overview = "개요\n" + ChageBr(Body.getResponse().getBody().getItems().getItem().get(0).getOverview()) + "\n";

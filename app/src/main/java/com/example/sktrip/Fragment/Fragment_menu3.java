@@ -22,6 +22,7 @@ import com.example.sktrip.R;
 import com.example.sktrip.Retrofit.APIClient;
 import com.example.sktrip.Retrofit.APIInterface;
 import com.example.sktrip.Retrofit.LikeData;
+import com.example.sktrip.TourApi.OnItemClick;
 
 
 import java.util.ArrayList;
@@ -73,10 +74,10 @@ public class Fragment_menu3 extends Fragment {
                             response.body().get(i).getMapx(),
                             response.body().get(i).getMapy()
 
-                            
+
                     ));
                 }
-                adapter = new LikeAdapter(data, getActivity(), R.layout.fragment_menu3_like_cv);
+                adapter = new LikeAdapter(data, getActivity(), R.layout.fragment_menu3_like_cv, (OnItemClick) getActivity());
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
             }

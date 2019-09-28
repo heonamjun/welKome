@@ -126,7 +126,7 @@ public interface TourApiService {
                                 @Query("pageNo") int pageNo);
 
     //공통정보 조회 ok
-    @GET("detailCommon?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=N&catcodeYN=N&addrinfoYN=N&mapinfoYN=N&overviewYN=Y&_type=json")
+    @GET("detailCommon?serviceKey=Wbxwtl8WwgmVKhpp9KzLIfEFqOJnJAOHysiyOKV9uVKu6wmZlE3Tf4h94V6%2Fg48FQmWRN2uVR2RLziOZi5vnnA%3D%3D&numOfRows=10&pageNo=1&MobileOS=AND&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&_type=json")
     Call<DataRES> getdetailCommon(@Query("contentId") int contentId);
 
     //소개 정보 조회

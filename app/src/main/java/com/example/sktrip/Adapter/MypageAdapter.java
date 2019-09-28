@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sktrip.R;
+import com.example.sktrip.TourApi.OnItemClick;
 
 import java.util.ArrayList;
 
@@ -19,16 +20,17 @@ public class MypageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData;
     private Context context;
     private int layoutId;
+    private OnItemClick mCallback;
 
 
     /**
      * 생성자
      */
-    public MypageAdapter(ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData, Context context, int layoutId) {
+    public MypageAdapter(ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData, Context context, int layoutId, OnItemClick mCallback) {
         this.GradeTourData = GradeTourData;
         this.context = context;
         this.layoutId = layoutId;
-
+        this.mCallback = mCallback;
     }
 
 
@@ -57,6 +59,35 @@ public class MypageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Glide.with(context).load(GradeTourData.get(position)
                     .getFirstimage())
                     .into(((MypageHolder) holder).MyPageImage);
+
+            ((MypageHolder)holder).itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallback.onClick(
+                            GradeTourData.get(position).getTitle(),
+                            GradeTourData.get(position).getAddr1(),
+                            GradeTourData.get(position).getAddr2(),
+                            GradeTourData.get(position).getAreacode(),
+                            GradeTourData.get(position).getBooktour(),
+                            GradeTourData.get(position).getCat1(),
+                            GradeTourData.get(position).getCat2(),
+                            GradeTourData.get(position).getCat3(),
+                            GradeTourData.get(position).getContentid(),
+                            GradeTourData.get(position).getContenttypeid(),
+                            GradeTourData.get(position).getCreatedtime(),
+                            GradeTourData.get(position).getFirstimage(),
+                            GradeTourData.get(position).getFirstimage2(),
+                            GradeTourData.get(position).getMapx(),
+                            GradeTourData.get(position).getMapy(),
+                            GradeTourData.get(position).getMlevel(),
+                            GradeTourData.get(position).getModifiedtime(),
+                            GradeTourData.get(position).getReadcount(),
+                            GradeTourData.get(position).getSigungucode(),
+                            GradeTourData.get(position).getTel(),
+                            GradeTourData.get(position).getZipcode());
+                }
+            });
+
         }
     }
 
