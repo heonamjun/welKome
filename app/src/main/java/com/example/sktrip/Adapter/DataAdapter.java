@@ -1,6 +1,7 @@
 package com.example.sktrip.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,15 +27,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.sktrip.Login.signIn.staticID;
-
 
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData;
-
     private Context context;
     private int layoutId;
     private OnItemClick mCallback;
+
+
 
 
     /**
@@ -46,6 +46,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.layoutId = layoutId;
         this.mCallback = mCallback;
     }
+
 
 
     /**
@@ -81,14 +82,21 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             ((GradeTour) holder).TourRating.setStepSize((float) 1);
 
+            final SharedPreferences preferences = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
+
             APIInterface apiInterface;
             apiInterface = APIClient.getClient().create(APIInterface.class);
-            Call<List<ratingData>> call = apiInterface.RationDataLoad(staticID, GradeTourData.get(position).getContentid());
+
+
+
+
+
+           Call<List<ratingData>> call =  apiInterface.RationDataLoad(preferences.getString("inputId",null) , GradeTourData.get(position).getContentid());
             call.enqueue(new Callback<List<ratingData>>() {
                 @Override
                 public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
-                    int rating = response.body().get(0).getRating();
-                    ((GradeTour) holder).TourRating.setRating(rating);
+                        int rating = response.body().get(0).getRating();
+                            ((GradeTour) holder).TourRating.setRating(rating);
                 }
 
                 @Override
@@ -96,6 +104,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 }
             });
+
 
 
             // Rating change + DB insert
@@ -112,18 +121,36 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     // 3. get userID
 
-                    String userID = staticID;
+                    final String userID = preferences.getString("inputId",null);
 
                     // 4. Connection
-                    APIInterface apiInterface;
+                    final APIInterface apiInterface;
                     apiInterface = APIClient.getClient().create(APIInterface.class);
 
-                    Call<List<ratingData>> call = apiInterface.doRatingDataInsert(staticID, userRating, contentid);
+                    Call<List<ratingData>> call = apiInterface.doRatingDataInsert(userID, userRating, contentid);
 
                     call.enqueue(new Callback<List<ratingData>>() {
                         @Override
                         public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
                             Toast.makeText(context, "평점 완료", Toast.LENGTH_LONG).show();
+
+                            Call<List<ratingData>> countcall = apiInterface.RatingDataCount(userID);
+                            countcall.enqueue(new Callback<List<ratingData>>() {
+                                @Override
+                                public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
+                                    int count = response.body().get(0).getCount();
+                                    String contents = "";
+                                    contents += count + "의 평점을 주셨습니다.";
+                                    Log.d("새로운 데이터를 갱신할", contents);
+                                    ((GradeTour) holder).TourGradeCount.setText(contents);
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<ratingData>> call, Throwable t) {
+
+                                }
+                            });
                         }
 
                         @Override
@@ -131,6 +158,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         }
                     });
+
+
 
 
                 }
@@ -189,6 +218,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private TextView TourTitle;
         private TextView TourAdd1;
         private RatingBar TourRating;
+        private  TextView TourGradeCount;
 
         public GradeTour(@NonNull View itemView) {
             super(itemView);
@@ -196,6 +226,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TourTitle = itemView.findViewById(R.id.TourTitle);
             TourAdd1 = itemView.findViewById(R.id.TourAdd1);
             TourRating = itemView.findViewById(R.id.TourRating);
+            TourGradeCount = itemView.findViewById(R.id.TourGradeCount);
 
         }
     }

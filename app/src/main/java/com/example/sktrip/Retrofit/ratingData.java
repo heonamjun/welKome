@@ -19,11 +19,11 @@ public class ratingData {
     private Integer count;
 
 
-    public Integer getCheck() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCheck(Integer count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 

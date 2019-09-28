@@ -1,12 +1,15 @@
 package com.example.sktrip.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +19,15 @@ import com.example.sktrip.Adapter.TabPagerAdapter;
 import com.example.sktrip.R;
 import com.example.sktrip.Retrofit.APIClient;
 import com.example.sktrip.Retrofit.APIInterface;
+import com.example.sktrip.Retrofit.ratingData;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_menu2 extends Fragment {
-
-    private static final String MENU2 = "MENU2";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private TabPagerAdapter tabPagerAdapter;
@@ -57,9 +65,31 @@ public class Fragment_menu2 extends Fragment {
 //        setupViewpager(viewPager);
 //        tabLayout.setupWithViewPager(viewPager);
 
+        final SharedPreferences preferences = getActivity().getSharedPreferences("auto", Context.MODE_PRIVATE);
+
         APIInterface apiInterface;
         apiInterface = APIClient.getClient().create(APIInterface.class);
-//        apiInterface.RatingDataCount()
+
+        final String userID = preferences.getString("inputId",null);
+
+
+        Call<List<ratingData>> call = apiInterface.RatingDataCount(userID);
+        call.enqueue(new Callback<List<ratingData>>() {
+            @Override
+            public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
+                int count = response.body().get(0).getCount();
+
+                String contents  = "";
+                contents += count + "개의 평점을 주셨습니다.";
+                TourGradeCount.setText(contents);
+            }
+
+            @Override
+            public void onFailure(Call<List<ratingData>> call, Throwable t) {
+
+            }
+        });
+
 
 
 
