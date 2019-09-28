@@ -35,8 +35,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private OnItemClick mCallback;
 
 
-
-
     /**
      * 생성자
      */
@@ -88,9 +86,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             apiInterface = APIClient.getClient().create(APIInterface.class);
 
 
-
-
-
            Call<List<ratingData>> call =  apiInterface.RationDataLoad(preferences.getString("inputId",null) , GradeTourData.get(position).getContentid());
             call.enqueue(new Callback<List<ratingData>>() {
                 @Override
@@ -104,9 +99,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 }
             });
-
-
-
 
 
 
