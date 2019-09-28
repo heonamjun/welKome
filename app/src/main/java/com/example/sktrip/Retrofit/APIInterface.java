@@ -37,4 +37,7 @@ public interface APIInterface {
 
     @GET("tourcheck/load")
     Call<List<checkData>> doCheckDataLoad(@Query("userId") String userId, @Query("contentid") int contentid);
+
+    @GET("recommend/read")
+    Call<List<RecommendData>> ReadRecommend();
 }

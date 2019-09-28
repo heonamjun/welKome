@@ -88,10 +88,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             APIInterface apiInterface;
             apiInterface = APIClient.getClient().create(APIInterface.class);
 
-
-
-
-
            Call<List<ratingData>> call =  apiInterface.RationDataLoad(preferences.getString("inputId",null) , GradeTourData.get(position).getContentid());
             call.enqueue(new Callback<List<ratingData>>() {
                 @Override
@@ -210,7 +206,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TourTitle = itemView.findViewById(R.id.TourTitle);
             TourAdd1 = itemView.findViewById(R.id.TourAdd1);
             TourRating = itemView.findViewById(R.id.TourRating);
-
         }
     }
 }

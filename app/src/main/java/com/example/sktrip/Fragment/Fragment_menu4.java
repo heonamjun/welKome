@@ -54,7 +54,7 @@ public class Fragment_menu4 extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.MyPageRecyclerView);
 //        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.menu2_first_sr);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayout.HORIZONTAL,false));
 
 
         final SharedPreferences preferences = getActivity().getSharedPreferences("auto", Context.MODE_PRIVATE);
@@ -78,7 +78,7 @@ public class Fragment_menu4 extends Fragment {
                             response.body().get(i).getRating()
                     ));
                 }
-                adapter = new MypageAdapter(data, getActivity(), R.layout.fragment_menu4_mypage_cv);
+                adapter = new MypageAdapter(data, getActivity(), R.layout.fragment_menu4_mypage_cv, (OnItemClick) getActivity());
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
             }

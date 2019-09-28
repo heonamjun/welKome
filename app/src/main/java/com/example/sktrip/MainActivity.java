@@ -2,6 +2,9 @@ package com.example.sktrip;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,7 +13,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
+import com.example.sktrip.Fragment.Fragment_menu1_all_list;
 import com.example.sktrip.Fragment.Fragment_menu1_first;
 import com.example.sktrip.Fragment.Fragment_menu2;
 import com.example.sktrip.Fragment.Fragment_menu2_TourInfo;
@@ -24,6 +29,9 @@ import com.skt.Tmap.TMapView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sktrip.Fragment.Fragment_menu1_first.ALL_LIST;
+import static com.example.sktrip.Fragment.Fragment_menu1_first.STAR_LIST;
+
 
 public class MainActivity extends AppCompatActivity implements OnItemClick {
 
@@ -36,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     public static final String MENU3 = "MENU3";
     public static final String MENU4 = "MENU4";
     public static final String TOURINFO = "TOURINFO";
+    public static boolean a;
 
     List<Fragment> fragmentList;
     final Fragment fragmentMenu1_first = new Fragment_menu1_first();
@@ -49,15 +58,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     private int lastindex;
     private int mselecteditem;
 
-    private MenuItem selecteditem;
 
+    /////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-
-
         initFragment();
 
         // Tmap 연결 설정
@@ -66,7 +74,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         /**
          BottomNavigationView 지정 (리스너)
          */
+
+
         navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -74,8 +85,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                 return false;
             }
         });
-
-
         MenuItem selecteditem;
 
         if (savedInstanceState != null) {
@@ -84,10 +93,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         } else {
             selecteditem = navigation.getMenu().getItem(0);
         }
-
         SelectedFragment(selecteditem);
     }
-
 
     /*
         mselecteditem 저장
@@ -130,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
      */
     public void SelectedFragment(MenuItem item) {
         item.setChecked(true);
+
         switch (item.getItemId()) {
             case R.id.navigation_menu1:
                 CurrentFragment(0);
@@ -137,7 +145,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
                 break;
 
             case R.id.navigation_menu2:
+
                 CurrentFragment(1);
+
+
 //                replaceFragment(fragmentMenu2, MENU2, 1);
                 break;
 
@@ -170,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     public void CurrentFragment(int position) {
         transaction = getSupportFragmentManager().beginTransaction();
         Fragment currentFragment = fragmentList.get(position);
+
         if (LastIndexCheck) {
             Fragment lastFragment = fragmentList.get(lastindex);
             transaction.hide(lastFragment);
@@ -178,9 +190,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         LastIndexCheck = true;
 
         if(!currentFragment.isAdded()){
+
             getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+
             transaction.add(R.id.frame_layout,currentFragment);
         }
+
 
         transaction.show(currentFragment);
         transaction.commitAllowingStateLoss();
@@ -296,10 +311,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     }
 
     @Override
-    public void onclick2() {
-        final Fragment fragment_menu2_first = new Fragment_menu2_first();
+    public void onclick2(String title) {
 
     }
+
+    @Override
+    public void onClicked(String value) {
+
+    }
+
 
     // 지도 사용 및 미사용 모두 연결
     public void TmapApiConnection(Context context){
