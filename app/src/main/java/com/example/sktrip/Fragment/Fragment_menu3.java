@@ -13,21 +13,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+
 
 import com.example.sktrip.Adapter.LikeAdapter;
-import com.example.sktrip.Adapter.MypageAdapter;
+
 import com.example.sktrip.Data.GradeTourData;
 import com.example.sktrip.R;
 import com.example.sktrip.Retrofit.APIClient;
 import com.example.sktrip.Retrofit.APIInterface;
 import com.example.sktrip.Retrofit.LikeData;
-import com.example.sktrip.Retrofit.MyPageData;
-import com.skt.Tmap.TMapMarkerItem;
-import com.skt.Tmap.TMapPOIItem;
-import com.skt.Tmap.TMapPoint;
-import com.skt.Tmap.TMapView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +43,6 @@ public class Fragment_menu3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu3, container, false);
-
-
-
 
 
         recyclerView = (RecyclerView) view.findViewById(R.id.LikeRecyclerView);
@@ -77,8 +69,11 @@ public class Fragment_menu3 extends Fragment {
                             response.body().get(i).getTitle(),
                             response.body().get(i).getContentid(),
                             response.body().get(i).getAddr1(),
-                            ChageHttps(response.body().get(i).getFirstimage())
+                            ChageHttps(response.body().get(i).getFirstimage()),
+                            response.body().get(i).getMapx(),
+                            response.body().get(i).getMapy()
 
+                            
                     ));
                 }
                 adapter = new LikeAdapter(data, getActivity(), R.layout.fragment_menu3_like_cv);

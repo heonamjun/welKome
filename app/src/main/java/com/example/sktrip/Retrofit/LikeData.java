@@ -25,6 +25,29 @@ public class LikeData {
     @SerializedName("count(*)")
     @Expose
     private Integer count;
+    @SerializedName("mapx")
+    @Expose
+    private double mapx;
+    @SerializedName("mapy")
+    @Expose
+    private double mapy;
+
+
+    public double getMapx() {
+        return mapx;
+    }
+
+    public void setMapx(double mapx) {
+        this.mapx = mapx;
+    }
+
+    public double getMapy() {
+        return mapy;
+    }
+
+    public void setMapy(double mapy) {
+        this.mapy = mapy;
+    }
 
     public String getId() {
         return id;

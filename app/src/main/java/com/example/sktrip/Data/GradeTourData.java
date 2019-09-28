@@ -73,13 +73,15 @@ public class GradeTourData extends RecyclerItem {
     /**
      * fragment_menu3_like
      */
-    public GradeTourData(Integer checkbox, String id, String title, Integer contentid, String addr1, String firstimage) {
+    public GradeTourData(Integer checkbox, String id, String title, Integer contentid, String addr1, String firstimage, double mapx, double mapy) {
         this.id = id;
         this.title = title;
         this.contentid = contentid;
         this.addr1 = addr1;
         this.firstimage = firstimage;
         this.checkbox = checkbox;
+        this.mapx = mapx;
+        this.mapy = mapy;
     }
 
 

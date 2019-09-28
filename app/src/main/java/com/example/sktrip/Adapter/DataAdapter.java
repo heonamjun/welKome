@@ -30,6 +30,7 @@ import retrofit2.Response;
 
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData;
+
     private Context context;
     private int layoutId;
     private OnItemClick mCallback;
@@ -56,8 +57,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
-        return new GradeTour(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
+            return new GradeTour(view);
     }
 
     /**
@@ -107,6 +108,10 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
+
+
+
+
             // Rating change + DB insert
             ((GradeTour) holder).TourRating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
                 @Override
@@ -121,10 +126,10 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     // 3. get userID
 
-                    final String userID = preferences.getString("inputId",null);
+                    String userID = preferences.getString("inputId",null);
 
                     // 4. Connection
-                    final APIInterface apiInterface;
+                    APIInterface apiInterface;
                     apiInterface = APIClient.getClient().create(APIInterface.class);
 
                     Call<List<ratingData>> call = apiInterface.doRatingDataInsert(userID, userRating, contentid);
@@ -133,24 +138,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         @Override
                         public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
                             Toast.makeText(context, "평점 완료", Toast.LENGTH_LONG).show();
-
-                            Call<List<ratingData>> countcall = apiInterface.RatingDataCount(userID);
-                            countcall.enqueue(new Callback<List<ratingData>>() {
-                                @Override
-                                public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
-                                    int count = response.body().get(0).getCount();
-                                    String contents = "";
-                                    contents += count + "의 평점을 주셨습니다.";
-                                    Log.d("새로운 데이터를 갱신할", contents);
-                                    ((GradeTour) holder).TourGradeCount.setText(contents);
-
-                                }
-
-                                @Override
-                                public void onFailure(Call<List<ratingData>> call, Throwable t) {
-
-                                }
-                            });
                         }
 
                         @Override
@@ -158,8 +145,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         }
                     });
-
-
 
 
                 }
@@ -205,7 +190,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return GradeTourData.size();
+            return GradeTourData.size();
     }
 
 
@@ -218,7 +203,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private TextView TourTitle;
         private TextView TourAdd1;
         private RatingBar TourRating;
-        private  TextView TourGradeCount;
 
         public GradeTour(@NonNull View itemView) {
             super(itemView);
@@ -226,7 +210,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TourTitle = itemView.findViewById(R.id.TourTitle);
             TourAdd1 = itemView.findViewById(R.id.TourAdd1);
             TourRating = itemView.findViewById(R.id.TourRating);
-            TourGradeCount = itemView.findViewById(R.id.TourGradeCount);
 
         }
     }

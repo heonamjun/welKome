@@ -1,20 +1,29 @@
 package com.example.sktrip.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sktrip.R;
+import com.example.sktrip.Retrofit.APIClient;
+import com.example.sktrip.Retrofit.APIInterface;
+import com.example.sktrip.Retrofit.checkData;
 import com.example.sktrip.TourApi.OnItemClick;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -55,6 +64,7 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      */
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        final SharedPreferences preferences = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
 
         /*
                 GradeTour view 셋팅
@@ -66,6 +76,100 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Glide.with(context).load(GradeTourData.get(position)
                     .getFirstimage2())
                     .into(((GradeTour) holder).TourImage);
+
+
+
+            APIInterface apiInterface;
+            apiInterface = APIClient.getClient().create(APIInterface.class);
+
+            Call<List<checkData>> call = apiInterface.doCheckDataLoad(preferences.getString("inputId",null) , GradeTourData.get(position).getContentid());
+            call.enqueue(new Callback<List<checkData>>() {
+                @Override
+                public void onResponse(Call<List<checkData>> call, Response<List<checkData>> response) {
+                    int checkNumber = response.body().get(0).getCount();
+
+                    if(checkNumber == 1){
+                        ((GradeTour)holder).TourCheckBox.setChecked(true);
+
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<checkData>> call, Throwable t) {
+
+                }
+            });
+
+
+
+
+
+            // Check box click listener !
+            ((GradeTour)holder).TourCheckBox.setOnClickListener(new CheckBox.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    // 1. contentid load
+                    int contentid = GradeTourData.get(position).getContentid();
+
+                    // 2. get check
+                    int userCheck = 1;
+
+                    // 3. get userID
+                    String userID = preferences.getString("inputId",null);
+
+                    // if check on  -- > DB save
+                    if( ((GradeTour) holder).TourCheckBox.isChecked() ){
+
+                        userCheck = 1;
+
+                        // 4. Connection
+                        APIInterface apiInterface;
+                        apiInterface = APIClient.getClient().create(APIInterface.class);
+
+                        Call<List<checkData>> call = apiInterface.doCheckDataInsert(userID, userCheck, contentid);
+
+                        call.enqueue(new Callback<List<checkData>>() {
+                            @Override
+                            public void onResponse(Call<List<checkData>> call, Response<List<checkData>> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<checkData>> call, Throwable t) {
+
+                            }
+                        });
+
+
+
+                    } else { // 체크박스 선택 해제1
+
+                        userCheck = 0;
+
+                        // 4. Connection
+                        APIInterface apiInterface;
+                        apiInterface = APIClient.getClient().create(APIInterface.class);
+
+                        Call<List<checkData>> call = apiInterface.doCheckDataInsert(userID, userCheck, contentid);
+
+                        call.enqueue(new Callback<List<checkData>>() {
+                            @Override
+                            public void onResponse(Call<List<checkData>> call, Response<List<checkData>> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<checkData>> call, Throwable t) {
+
+                            }
+                        });
+
+                    }
+                }
+            });
 
 
 
@@ -120,12 +224,14 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         private ImageView TourImage;
         private TextView TourTitle;
         private TextView TourAdd1;
+        private CheckBox TourCheckBox;
 
         public GradeTour(@NonNull View itemView) {
             super(itemView);
             TourImage = itemView.findViewById(R.id.TourImage);
             TourTitle = itemView.findViewById(R.id.TourTitle);
             TourAdd1 = itemView.findViewById(R.id.TourAdd1);
+            TourCheckBox = itemView.findViewById(R.id.checkBox);
         }
     }
 }

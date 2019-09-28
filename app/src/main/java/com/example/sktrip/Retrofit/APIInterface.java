@@ -31,5 +31,10 @@ public interface APIInterface {
 
     @GET("likepage/likelist")
     Call<List<LikeData>> LikePageList(@Query("userId") String userId);
-}
 
+    @GET("tourcheck/insert")
+    Call<List<checkData>> doCheckDataInsert(@Query("userId") String userId, @Query("checkbox") int checkbox, @Query("contentid") int contentid);
+
+    @GET("tourcheck/load")
+    Call<List<checkData>> doCheckDataLoad(@Query("userId") String userId, @Query("contentid") int contentid);
+}
