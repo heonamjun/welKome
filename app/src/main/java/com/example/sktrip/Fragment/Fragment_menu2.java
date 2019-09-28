@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,11 +29,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.sktrip.Fragment.Fragment_menu1_first.ALL_LIST;
+import static com.example.sktrip.Fragment.Fragment_menu1_first.STAR_LIST;
+import static com.example.sktrip.MainActivity.TOURINFO;
+
 public class Fragment_menu2 extends Fragment {
+
+    private static final String MENU2 = "MENU2";
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private TabPagerAdapter tabPagerAdapter;
     private ViewPager viewPager;
+    public FragmentTransaction transaction;
+
     private TextView TourGradeCount;
 
 
@@ -126,6 +136,22 @@ public class Fragment_menu2 extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Fragment all_list = getFragmentManager().findFragmentByTag(ALL_LIST);
+        transaction = getFragmentManager().beginTransaction();
+
+        Fragment star_list = getFragmentManager().findFragmentByTag(STAR_LIST);
+        if(all_list != null){
+            transaction.remove(all_list).commit();
+        }
+        if(star_list !=null) {
+            transaction.remove(star_list).commit();
+        }
+
+    }
 
 }
 

@@ -1,8 +1,11 @@
 package com.example.sktrip.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,9 +27,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.sktrip.Activity.CameraActivity;
 import com.example.sktrip.Activity.TourAll;
 import com.example.sktrip.Adapter.DataAdapter;
 import com.example.sktrip.Adapter.firstpageAdapter;
+import com.example.sktrip.Camera.Camera2BasicFragment;
 import com.example.sktrip.Data.GradeTourData;
 import com.example.sktrip.Data.RecyclerItem;
 import com.example.sktrip.MainActivity;
@@ -58,7 +63,9 @@ public class Fragment_menu1_first extends Fragment {
     private int contentid = 0;
 
     private OnItemClick mCallback;
-    private Button allbutton;
+   private Button allbutton;
+   public static final String ALL_LIST = "ALL_LIST";
+    public static final String STAR_LIST= "STAR_LIST";
 
 
     public static Fragment_menu1_first newInstance() {
@@ -137,7 +144,12 @@ public class Fragment_menu1_first extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("잘눌려요");
-                Toast.makeText(getContext(), "cardview", Toast.LENGTH_LONG).show();
+               Toast.makeText(getContext(),"tqtq",Toast.LENGTH_LONG).show();
+//            ((MainActivity)getActivity()).replaceFragment(Fragment_menu2_third.newInstance());
+                final Fragment fragment_menu1_second = new Fragment_menu1_second();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.frame_layout, fragment_menu1_second,STAR_LIST).addToBackStack(STAR_LIST).commit();
 
 
             }
@@ -148,14 +160,15 @@ public class Fragment_menu1_first extends Fragment {
             @Override
             public void onClick(View view) {
                 System.out.println("잘눌려요");
-                Toast.makeText(getContext(), "클릭", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"클릭",Toast.LENGTH_LONG).show();
 
                 final Fragment fragment_menu1_all_list = new Fragment_menu1_all_list();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, fragment_menu1_all_list);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.add(R.id.frame_layout, fragment_menu1_all_list,ALL_LIST).addToBackStack(ALL_LIST).commit();
+
+                              /* fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();*/
             }
         });
 
