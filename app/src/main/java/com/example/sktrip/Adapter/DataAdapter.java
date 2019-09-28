@@ -1,8 +1,10 @@
 package com.example.sktrip.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +27,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.sktrip.Login.signIn.staticID;
-
 
 public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<com.example.sktrip.Data.GradeTourData> GradeTourData;
@@ -34,6 +34,8 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private int layoutId;
     private OnItemClick mCallback;
+
+
 
 
     /**
@@ -81,11 +83,16 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             ((GradeTour) holder).TourRating.setStepSize((float) 1);
 
+            final SharedPreferences preferences = context.getSharedPreferences("auto", Context.MODE_PRIVATE);
+
             APIInterface apiInterface;
             apiInterface = APIClient.getClient().create(APIInterface.class);
 
 
-           Call<List<ratingData>> call =  apiInterface.RationDataLoad(staticID , GradeTourData.get(position).getContentid());
+
+
+
+           Call<List<ratingData>> call =  apiInterface.RationDataLoad(preferences.getString("inputId",null) , GradeTourData.get(position).getContentid());
             call.enqueue(new Callback<List<ratingData>>() {
                 @Override
                 public void onResponse(Call<List<ratingData>> call, Response<List<ratingData>> response) {
@@ -119,7 +126,7 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     // 3. get userID
 
-                    String userID = staticID;
+                    String userID = preferences.getString("inputId",null);
 
                     // 4. Connection
                     APIInterface apiInterface;
@@ -138,8 +145,6 @@ public class DataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         }
                     });
-
-
 
 
                 }

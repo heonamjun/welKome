@@ -1,6 +1,6 @@
 package com.example.sktrip.Data;
 
-public class GradeTourData extends RecyclerItem{
+public class GradeTourData extends RecyclerItem {
     private String addr1;
     private String addr2;
     private Integer areacode;
@@ -22,6 +22,10 @@ public class GradeTourData extends RecyclerItem{
     private String tel;
     private String title;
     private String zipcode;
+    private Integer rating;
+    private Integer count;
+    private String id;
+    private Integer checkbox;
 
 
     public GradeTourData(String title, String addr1, String addr2, Integer areacode, Integer booktour,
@@ -52,17 +56,65 @@ public class GradeTourData extends RecyclerItem{
         this.zipcode = zipcode;
     }
 
-    /**
-     * TourInfoimageData
-     */
-    private String originimgurl;
-    private String serialnum;
-    private String smallimageurl;
 
-    public GradeTourData(String originimgurl, String serialnum, String smallimageurl) {
-        this.originimgurl = originimgurl;
-        this.serialnum = serialnum;
-        this.smallimageurl = smallimageurl;
+    /**
+     * fragment_menu4_mypage
+     */
+
+    public GradeTourData(String id, String title, Integer contentid, String addr1, String firstimage, Integer rating) {
+        this.id = id;
+        this.title = title;
+        this.contentid = contentid;
+        this.addr1 = addr1;
+        this.firstimage = firstimage;
+        this.rating = rating;
+    }
+
+    /**
+     * fragment_menu3_like
+     */
+    public GradeTourData(Integer checkbox, String id, String title, Integer contentid, String addr1, String firstimage, double mapx, double mapy) {
+        this.id = id;
+        this.title = title;
+        this.contentid = contentid;
+        this.addr1 = addr1;
+        this.firstimage = firstimage;
+        this.checkbox = checkbox;
+        this.mapx = mapx;
+        this.mapy = mapy;
+    }
+
+
+    public Integer getCheckbox() {
+        return checkbox;
+    }
+
+    public void setCheckbox(Integer checkbox) {
+        this.checkbox = checkbox;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAddr1() {
@@ -225,29 +277,6 @@ public class GradeTourData extends RecyclerItem{
         this.title = title;
     }
 
-    public String getOriginimgurl() {
-        return originimgurl;
-    }
-
-    public void setOriginimgurl(String originimgurl) {
-        this.originimgurl = originimgurl;
-    }
-
-    public String getSerialnum() {
-        return serialnum;
-    }
-
-    public void setSerialnum(String serialnum) {
-        this.serialnum = serialnum;
-    }
-
-    public String getSmallimageurl() {
-        return smallimageurl;
-    }
-
-    public void setSmallimageurl(String smallimageurl) {
-        this.smallimageurl = smallimageurl;
-    }
 
     public String getZipcode() {
         return zipcode;

@@ -1,6 +1,5 @@
 package com.example.sktrip.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -31,7 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-
 public class Fragment_menu1_all_list extends Fragment {
 
     private int SpinnerNum = 1;
@@ -47,9 +45,6 @@ public class Fragment_menu1_all_list extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
     }
 
 
@@ -151,10 +146,7 @@ public class Fragment_menu1_all_list extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.menu2_first_rv);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.menu2_first_sr);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager
-                = new GridLayoutManager(getContext(),2);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
 
@@ -333,6 +325,7 @@ public class Fragment_menu1_all_list extends Fragment {
         });
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }
 

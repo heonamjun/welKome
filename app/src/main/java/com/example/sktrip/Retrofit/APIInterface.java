@@ -18,13 +18,23 @@ public interface APIInterface {
     Call<List<registerData>> doIdCheck(@Query("userId") String userId);
 
     @GET("rating/insert")
-    Call<List<ratingData>> doRatingDataInsert(@Query("id") String id, @Query("rating") int rating, @Query("contentid") int contentid);
-
-    @GET("rating/load2")
-    Call<List<ratingData>> doRatingDataLoad2(@Query("id") String id, @Query("contentid") int contentid);
-
-
+    Call<List<ratingData>> doRatingDataInsert(@Query("userId") String userId, @Query("rating") int rating, @Query("contentid") int contentid);
 
     @GET("rating/load")
-    Call<List<ratingData>> RationDataLoad(@Query("id") String id,  @Query("contentid") int contentid);
+    Call<List<ratingData>> RationDataLoad(@Query("userId") String userId,  @Query("contentid") int contentid);
+
+    @GET("rating/count")
+    Call<List<ratingData>> RatingDataCount(@Query("userId") String userId);
+
+    @GET("mypage/gradelist")
+    Call<List<MyPageData>> MyPageGradeList(@Query("userId") String userId);
+
+    @GET("likepage/likelist")
+    Call<List<LikeData>> LikePageList(@Query("userId") String userId);
+
+    @GET("tourcheck/insert")
+    Call<List<checkData>> doCheckDataInsert(@Query("userId") String userId, @Query("checkbox") int checkbox, @Query("contentid") int contentid);
+
+    @GET("tourcheck/load")
+    Call<List<checkData>> doCheckDataLoad(@Query("userId") String userId, @Query("contentid") int contentid);
 }
