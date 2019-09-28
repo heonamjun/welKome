@@ -1,7 +1,9 @@
 package com.example.sktrip.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,32 +11,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
-
-
-import com.example.sktrip.Adapter.DataAdapter;
-
 import com.example.sktrip.Adapter.firstpageAdapter;
 import com.example.sktrip.Data.GradeTourData;
-import com.example.sktrip.TourApi.LoadTourApi;
-import com.example.sktrip.TourApi.OnItemClick;
 import com.example.sktrip.R;
-import com.example.sktrip.TourApi.TourApiService;
+import com.example.sktrip.TourApi.LoadTourApi;
 import com.example.sktrip.TourApi.Model.DataRES;
-
+import com.example.sktrip.TourApi.OnItemClick;
 
 import java.util.ArrayList;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 
 public class Fragment_menu1_all_list extends Fragment {
@@ -52,6 +47,9 @@ public class Fragment_menu1_all_list extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
     }
 
 
@@ -335,7 +333,6 @@ public class Fragment_menu1_all_list extends Fragment {
         });
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 }
 

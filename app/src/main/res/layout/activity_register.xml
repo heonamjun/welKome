@@ -30,11 +30,20 @@ Fields marked * are mandatory" />
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="50dp"
         android:ems="10"
         android:hint="ID"
         android:inputType="textEmailAddress" />
+
+
+    <ImageButton
+        android:id="@+id/idCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#000000FF"
+        app:srcCompat="@drawable/idcheck" />
 
     <EditText
         android:id="@+id/pwForm"
@@ -75,7 +84,7 @@ Fields marked * are mandatory" />
         android:layout_width="310dp"
         android:layout_height="64dp"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:text="By Creating Account, you are automatically accepting all the Terms Conditions related to Momento" />
 
     <ImageButton

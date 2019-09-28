@@ -587,11 +587,10 @@ public class Camera2BasicFragment extends Fragment
         Glide.with(this).load(filterImageUrl).into(filterImageView);
 
         view.findViewById(R.id.capture).setOnClickListener(this);
-        view.findViewById(R.id.listbutton).setOnClickListener(this);
-        view.findViewById(R.id.imageButton2).setOnClickListener(this);
+
         view.findViewById(R.id.imageButton3).setOnClickListener(this); //후레쉬
 
-        view.findViewById(R.id.imageButton5).setOnClickListener(this);
+
         view.findViewById(R.id.imageButton4).setOnClickListener(this);
 
         close= AnimationUtils.loadAnimation(mContext, R.anim.translate_down);
@@ -599,31 +598,6 @@ public class Camera2BasicFragment extends Fragment
 
 
 
-        button = (ImageButton) view.findViewById(R.id.listbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-            // 열기 / 닫기 의 경우로 보여주려고 할때.
-            @Override
-            public void onClick(View view) {
-
-                    listb.setVisibility(View.VISIBLE);
-                listb.startAnimation(open);
-                      // 왼쪽으로 보이기
-
-                    //여기서 중요한것이 끝난시점으로 처리 해야하므로 이때 리스너를 하나 추가해야함
-                    // 따라서 밑에 클래스 추가
-
-            }
-        });
-        posebutton=(ImageButton)view.findViewById(R.id.posebutton); // 연예인포즈
-
-        posebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                poselist.setVisibility(View.VISIBLE);
-                poselist.startAnimation(open);
-
-            }
-        });
 
         button2 = (ImageButton) view.findViewById(R.id.closeList);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -643,12 +617,12 @@ public class Camera2BasicFragment extends Fragment
             }
         });
         ImageButton imgbtton = ((Activity)mContext).findViewById(R.id.imageButton3);
-        ImageButton imgbtton2=((Activity)mContext).findViewById(R.id.imageButton5);
+
         if(filterImageUrl!="" || lineImageUrl!="") {  // 사진 한번더 클릭했을때 이미지뷰 초기화
 
             seekBar.setVisibility(View.VISIBLE);
             imgbtton.setVisibility(View.VISIBLE);
-            imgbtton2.setVisibility(View.VISIBLE);
+
 
         }
 
@@ -1151,7 +1125,6 @@ public class Camera2BasicFragment extends Fragment
 
         SeekBar seekBar = ((Activity)mContext).findViewById(R.id.seekBar);
         ImageButton imgbtton = ((Activity)mContext).findViewById(R.id.imageButton3);
-        ImageButton imgbtton2 = ((Activity)mContext).findViewById(R.id.imageButton5);
 
         switch (view.getId()) {
             case R.id.capture:
@@ -1188,22 +1161,8 @@ public class Camera2BasicFragment extends Fragment
                 closeCamera();
                 openCamera(mTextureView.getWidth(), mTextureView.getHeight());
                 break;
-            case R.id.imageButton2: {
-                openGallary();
-                break;
-            }
-            case R.id.imageButton5: {
-               // Glide.clear(filterImageView);
-                stickerView.removeAllStickers();
-                seekBar.setVisibility(View.GONE);
-                imgbtton.setVisibility(View.GONE);
-                imgbtton2.setVisibility(View.GONE);
 
-                break;
-            }
-            case R.id.listbutton:{
 
-            }
             case R.id.imageButton3: {
                 if(clickk==true ){
                     filterImageView.setRotationY(180); // 사진 좌우 변경
@@ -1241,7 +1200,6 @@ public class Camera2BasicFragment extends Fragment
 
         SeekBar seekBar = ((Activity)mContext).findViewById(R.id.seekBar);
         ImageButton imgbtton = ((Activity)mContext).findViewById(R.id.imageButton3);
-        ImageButton imgbtton2 = ((Activity)mContext).findViewById(R.id.imageButton5);
 
         // Check which request we're responding to
         if (requestCode == 100) {
@@ -1255,7 +1213,6 @@ public class Camera2BasicFragment extends Fragment
                     if(imagepath!=""){
                         seekBar.setVisibility(View.VISIBLE);
                         imgbtton.setVisibility(View.VISIBLE);
-                        imgbtton2.setVisibility(View.VISIBLE);
 
                     }
                 } catch (Exception e) {

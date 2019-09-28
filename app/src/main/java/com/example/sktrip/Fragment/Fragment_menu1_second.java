@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,8 +60,8 @@ public class Fragment_menu1_second extends Fragment  {
 
         mrecyclerview=(RecyclerView)view.findViewById(R.id.recyclerviewtest);
         mrecyclerview.setHasFixedSize(true); // 카드뷰 사이즈 고정
-        //mlayoutmanager = new GridLayoutManager(this, 2);// 사이클뷰 디자인부분 2열
-        mlayoutmanager = new LinearLayoutManager(mContext , LinearLayout.VERTICAL,false); // 가로로 스크롤
+        mlayoutmanager = new GridLayoutManager(mContext, 2);// 사이클뷰 디자인부분 2열
+    //    mlayoutmanager = new LinearLayoutManager(mContext , LinearLayout.VERTICAL,false); // 가로로 스크롤
         mrecyclerview.setLayoutManager(mlayoutmanager);
 
 

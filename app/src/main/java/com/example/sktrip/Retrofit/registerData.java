@@ -14,6 +14,17 @@ public class registerData {
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("count(*)")
+    @Expose
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
     public String getPassword() {
         return password;

@@ -1,7 +1,11 @@
 package com.example.sktrip.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +29,7 @@ import com.example.sktrip.Activity.CameraActivity;
 import com.example.sktrip.Activity.TourAll;
 import com.example.sktrip.Adapter.DataAdapter;
 import com.example.sktrip.Adapter.firstpageAdapter;
+import com.example.sktrip.Camera.Camera2BasicFragment;
 import com.example.sktrip.Data.GradeTourData;
 import com.example.sktrip.Data.RecyclerItem;
 import com.example.sktrip.MainActivity;
@@ -50,6 +55,8 @@ public class Fragment_menu1_first extends Fragment {
     ImageView TourImage;
     private OnItemClick mCallback;
    private Button allbutton;
+   public static final String ALL_LIST = "ALL_LIST";
+    public static final String STAR_LIST= "STAR_LIST";
 
 
     public static Fragment_menu1_first newInstance() {
@@ -79,9 +86,8 @@ public class Fragment_menu1_first extends Fragment {
                 final Fragment fragment_menu1_second = new Fragment_menu1_second();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, fragment_menu1_second);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.add(R.id.frame_layout, fragment_menu1_second,STAR_LIST).addToBackStack(STAR_LIST).commit();
+
 
             }
         });
@@ -93,14 +99,13 @@ public class Fragment_menu1_first extends Fragment {
                 System.out.println("잘눌려요");
                 Toast.makeText(getContext(),"클릭",Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(view.getContext(), CameraActivity.class);
-                view.getContext().startActivity(intent);
                 final Fragment fragment_menu1_all_list = new Fragment_menu1_all_list();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, fragment_menu1_all_list);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                fragmentTransaction.add(R.id.frame_layout, fragment_menu1_all_list,ALL_LIST).addToBackStack(ALL_LIST).commit();
+
+                              /* fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();*/
             }
         });
 

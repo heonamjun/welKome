@@ -24,7 +24,7 @@ public interface OnItemClick {
                  String zipcode);
 
     void onclick1(String title,Double mapx,Double mapy);
-    void onclick2();
+    void onclick2(String title);
     void onClicked(String value);
 
 }

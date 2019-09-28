@@ -11,10 +11,11 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Login.Splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +26,15 @@
 
         <activity android:name=".Activity.CameraActivity" />
 
+        <activity android:name=".Login.signIn"></activity>
+        <activity android:name=".Login.SetUpProfile"></activity>
+        <activity android:name=".Login.ResetPassword"></activity>
+        <activity android:name=".Login.CreateNewPassword"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Login.Register"></activity>
     </application>
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

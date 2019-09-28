@@ -22,6 +22,8 @@ import com.example.sktrip.Fragment.Fragment_menu3;
 import com.example.sktrip.R;
 import com.example.sktrip.TourApi.OnItemClick;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class StarImageAdapter extends RecyclerView.Adapter<StarImageAdapter.VIewHolder>  {
@@ -41,6 +43,8 @@ public class StarImageAdapter extends RecyclerView.Adapter<StarImageAdapter.VIew
         public VIewHolder(View view) {
             super(view);
             mimageview = (ImageView) view.findViewById(R.id.drama_image);
+            ttextview = (TextView) view.findViewById(R.id.TourTitle);
+
         }
     }
 
@@ -66,7 +70,7 @@ public class StarImageAdapter extends RecyclerView.Adapter<StarImageAdapter.VIew
         //position에서 데이터 요소 가져오기.혁준
         //cardview 하나하나 보여주는 함수.혁준
         Glide.with(holder.mimageview.getContext()).load(mDataset.get(position).getPicUrl()).into(holder.mimageview); // 글라이드 라이브러리 사용해서 이미지뷰 부르기.남준준        holder.mtextview.setText(mDataset.get(position).gps);
-
+        holder.ttextview.setText(mDataset.get(position).getTitle());
         holder.mimageview.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -102,4 +106,3 @@ public class StarImageAdapter extends RecyclerView.Adapter<StarImageAdapter.VIew
     }
 
 }
-
