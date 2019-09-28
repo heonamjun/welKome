@@ -43,7 +43,7 @@ public class signIn extends AppCompatActivity {
 
         Toolbar tb = findViewById(R.id.app_toolbar);
         setSupportActionBar(tb);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ActionBar ab = getSupportActionBar();
 

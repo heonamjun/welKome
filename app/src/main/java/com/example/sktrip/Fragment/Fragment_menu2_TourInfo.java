@@ -1,9 +1,14 @@
 package com.example.sktrip.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,8 +27,13 @@ import com.example.sktrip.Data.TourInfoImageData;
 import com.example.sktrip.R;
 import com.example.sktrip.TourApi.LoadTourApi;
 import com.example.sktrip.TourApi.Model.DataRES;
+import com.skt.Tmap.TMapMarkerItem;
+import com.skt.Tmap.TMapPoint;
+import com.skt.Tmap.TMapTapi;
+import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -202,6 +212,99 @@ public class Fragment_menu2_TourInfo extends Fragment {
         TourInfoImage();
 
 
+        // T map 길찾기 안내
+
+        FloatingActionButton myFab = (FloatingActionButton) view.findViewById(R.id.flexible_example_fab);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                TMapTapi tMapTapi = new TMapTapi(getContext());
+
+                boolean isTmapApp = tMapTapi.isTmapApplicationInstalled();
+
+                // T map installed --> T map application run
+                if(isTmapApp){
+                    HashMap pathInfo = new HashMap();
+
+                    pathInfo.put("rGoName", title);
+                    pathInfo.put("rGoX", String.valueOf(mapx));
+                    pathInfo.put("rGoY", String.valueOf(mapy));
+
+                    pathInfo.put("rStName", "출발지");
+                    pathInfo.put("rStX", "126.926252");
+                    pathInfo.put("rStY", "37.557607");
+
+                    tMapTapi.invokeRoute(pathInfo);
+                } else { // --> T map not installed
+                    ArrayList result = tMapTapi.getTMapDownUrl();
+
+                    Intent intent = new Intent (Intent.ACTION_VIEW, Uri.parse(String.valueOf(result.get(0))));
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+        // T map 지도 생성하기
+
+        LinearLayout linearLayoutTmap = (LinearLayout)view.findViewById(R.id.linearLayoutTmap);
+        TMapView tMapView = new TMapView(getActivity());
+        tMapView.setSKTMapApiKey("8c33961b-880a-4b3d-b140-fb83bea55a92");
+        linearLayoutTmap.addView( tMapView );
+        tMapView.setCenterPoint(mapx, mapy, true);
+        tMapView.setHttpsMode(true);
+
+        // 클릭 이벤트 설정
+        tMapView.setOnClickListenerCallBack(new TMapView.OnClickListenerCallback() {
+            @Override
+            public boolean onPressEvent(ArrayList arrayList, ArrayList arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                //Toast.makeText(MapEvent.this, "onPress~!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onPressUpEvent(ArrayList arrayList, ArrayList arrayList1, TMapPoint tMapPoint, PointF pointF) {
+                //Toast.makeText(MapEvent.this, "onPressUp~!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+// 롱 클릭 이벤트 설정
+        tMapView.setOnLongClickListenerCallback(new TMapView.OnLongClickListenerCallback() {
+            @Override
+            public void onLongPressEvent(ArrayList arrayList, ArrayList arrayList1, TMapPoint tMapPoint) {
+                //Toast.makeText(MapEvent.this, "onLongPress~!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 지도 스크롤 종료
+        tMapView.setOnDisableScrollWithZoomLevelListener(new TMapView.OnDisableScrollWithZoomLevelCallback() {
+            @Override
+            public void onDisableScrollWithZoomLevelEvent(float zoom, TMapPoint centerPoint) {
+            }
+        });
+
+        TMapMarkerItem markerItem1 = new TMapMarkerItem();
+
+        TMapPoint tMapPoint1 = new TMapPoint(mapy, mapx); // SKT타워
+
+// 마커 아이콘
+        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.poi_star);
+
+        markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+        markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
+        markerItem1.setTMapPoint( tMapPoint1 ); // 마커의 좌표 지정
+        markerItem1.setName("SKT타워"); // 마커의 타이틀 지정
+        tMapView.addMarkerItem("markerItem1", markerItem1); // 지도에 마커 추가
+
+        tMapView.setCenterPoint( mapy, mapx );
+
+
+
+
+
+
         return view;
     }
 
@@ -373,5 +476,7 @@ public class Fragment_menu2_TourInfo extends Fragment {
 
         return result;
     }
+
+
 
 }

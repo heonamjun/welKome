@@ -1,5 +1,6 @@
 package com.example.sktrip;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -17,6 +18,8 @@ import com.example.sktrip.Fragment.Fragment_menu2_first;
 import com.example.sktrip.Fragment.Fragment_menu3;
 import com.example.sktrip.Fragment.Fragment_menu4;
 import com.example.sktrip.TourApi.OnItemClick;
+import com.skt.Tmap.TMapTapi;
+import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
 
 
         initFragment();
+
+        // Tmap 연결 설정
+        TmapApiConnection(this);
 
         /**
          BottomNavigationView 지정 (리스너)
@@ -294,4 +300,18 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
         final Fragment fragment_menu2_first = new Fragment_menu2_first();
 
     }
+
+    // 지도 사용 및 미사용 모두 연결
+    public void TmapApiConnection(Context context){
+
+        TMapView tmapview = new TMapView(context);
+        tmapview.setSKTMapApiKey("8c33961b-880a-4b3d-b140-fb83bea55a92");
+
+        TMapTapi tmaptapi = new TMapTapi(context);
+        tmaptapi.setSKTMapAuthentication ("8c33961b-880a-4b3d-b140-fb83bea55a92");
+
+    }
+
+
+
 }
