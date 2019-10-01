@@ -85,7 +85,7 @@ Fields marked * are mandatory" />
         android:layout_height="64dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="By Creating Account, you are automatically accepting all the Terms Conditions related to Momento" />
+        android:text="By Creating Account, you are automatically accepting all the Terms Conditions related to Welkome" />
 
     <ImageButton
         android:id="@+id/proceed"

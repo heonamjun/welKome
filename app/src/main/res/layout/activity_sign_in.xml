@@ -22,7 +22,7 @@
         android:layout_height="64dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Type in your Email ID and Password you chose for Momento and click Go to Feed" />
+        android:text="Type in your Email ID and Password you chose for Welkome and click Go to Feed" />
 
     <EditText
         android:id="@+id/idForm"

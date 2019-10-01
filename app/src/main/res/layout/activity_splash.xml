@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="마이 리틀 복지"
+        android:text="WelKome"
         android:textAlignment="center"
         android:textSize="36sp" />
 
@@ -38,7 +38,7 @@
         android:layout_height="46dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Momento is a social app that lets you share your moments with friends" />
+        android:text="Welkome is a social app that lets you share your moments with friends" />
 
     <ImageButton
         android:id="@+id/signIn"
