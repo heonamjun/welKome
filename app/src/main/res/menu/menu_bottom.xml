@@ -3,21 +3,21 @@
 
     <item
         android:id="@+id/navigation_menu1"
-        android:icon="@android:drawable/ic_menu_call"
-        android:title="추천하기" />
+        android:icon="@drawable/ic_menu1_24dp"
+        android:title="추천" />
 
     <item
         android:id="@+id/navigation_menu2"
         android:icon="@drawable/ic_menu2_24dp"
-        android:title="평가하기" />
+        android:title="평가" />
 
     <item
         android:id="@+id/navigation_menu3"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="지도" />
+        android:icon="@drawable/ic_menu3"
+        android:title="좋아요" />
 
     <item
         android:id="@+id/navigation_menu4"
-        android:icon="@android:drawable/ic_menu_help"
+        android:icon="@drawable/ic_menu4_24dp"
         android:title="계정" />
 </menu>

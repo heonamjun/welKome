@@ -24,8 +24,7 @@
                     <TextView
                         android:id="@+id/TourGradeCount"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TourGradeCount" />
+                        android:layout_height="wrap_content" />
 
                 </android.support.v7.widget.Toolbar>
 
@@ -33,8 +32,8 @@
                     android:id="@+id/TourTopLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabBackground="@color/colorWhite"
-                    app:tabTextColor="@color/design_default_color_primary_dark">
+                    app:tabBackground="@color/white"
+                    app:tabTextColor="@color/welkome_color">
                 </android.support.design.widget.TabLayout>
 
 
