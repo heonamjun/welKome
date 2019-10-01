@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.welkome.sktrip">
+    package="com.welkomelite.sktrip">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity
-            android:name="com.welkome.sktrip.Login.Splash"
+            android:name="com.welkomelite.sktrip.Login.Splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +24,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.welkome.sktrip.Activity.CameraActivity" />
+        <activity android:name="com.welkomelite.sktrip.Activity.CameraActivity" />
 
-        <activity android:name="com.welkome.sktrip.Login.signIn"></activity>
-        <activity android:name="com.welkome.sktrip.Login.SetUpProfile"></activity>
-        <activity android:name="com.welkome.sktrip.Login.ResetPassword"></activity>
-        <activity android:name="com.welkome.sktrip.Login.CreateNewPassword"></activity>
-        <activity android:name="com.welkome.sktrip.MainActivity"></activity>
-        <activity android:name="com.welkome.sktrip.Login.Register"></activity>
+        <activity android:name="com.welkomelite.sktrip.Login.signIn"></activity>
+        <activity android:name="com.welkomelite.sktrip.Login.SetUpProfile"></activity>
+        <activity android:name="com.welkomelite.sktrip.Login.ResetPassword"></activity>
+        <activity android:name="com.welkomelite.sktrip.Login.CreateNewPassword"></activity>
+        <activity android:name="com.welkomelite.sktrip.MainActivity"></activity>
+        <activity android:name="com.welkomelite.sktrip.Login.Register"></activity>
     </application>
 
 

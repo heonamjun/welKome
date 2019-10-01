@@ -88,6 +88,7 @@
                     android:id="@+id/TourInfo_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -137,6 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:orientation="vertical"
+                        android:layout_marginBottom="10dp"
                         tools:context="com.skt.tmapsample.tmapview.MapDraw">
 
                         <LinearLayout
