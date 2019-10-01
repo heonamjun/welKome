@@ -22,7 +22,7 @@
         android:layout_height="64dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:text="Hey! We need few details from you before you start sharing on Momento" />
+        android:text="Hey! We need few details from you before you start sharing on Welkome" />
 
     <EditText
         android:id="@+id/idForm"
