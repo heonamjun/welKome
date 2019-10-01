@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <com.example.sktrip.Camera.AutoFitTextureView
+            <com.welkome.sktrip.Camera.AutoFitTextureView
                 android:id="@+id/texture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

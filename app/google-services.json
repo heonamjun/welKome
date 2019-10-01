@@ -71,6 +71,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232494421068:android:61b99f8018acfec19ed0e9",
+        "android_client_info": {
+          "package_name": "com.welkome.sktrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232494421068-i1ag8dnhoh2fjh7oq561s9q705rfrga5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM4se4zD4reIkJmomsFJ0Aatzl0mPzVzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232494421068-i1ag8dnhoh2fjh7oq561s9q705rfrga5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
