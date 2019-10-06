@@ -1,16 +1,22 @@
 package com.welkome.sktrip;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.welkome.sktrip.Activity.CameraActivity;
 import com.welkome.sktrip.Fragment.Fragment_menu1_first;
 import com.welkome.sktrip.Fragment.Fragment_menu2;
 import com.welkome.sktrip.Fragment.Fragment_menu2_TourInfo;
@@ -55,6 +61,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClick {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            } else {
+                Toast.makeText(MainActivity.this, "권한을 허용해주세요", Toast.LENGTH_LONG).show();
+            }
+        }
 
         setContentView(R.layout.activity_main);
         initFragment();

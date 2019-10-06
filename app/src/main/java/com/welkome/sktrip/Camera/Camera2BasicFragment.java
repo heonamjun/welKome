@@ -484,6 +484,7 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
 
+
         final Animation open ;
         final Animation close;
         getView().setFocusableInTouchMode(true);

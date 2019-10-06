@@ -33,9 +33,10 @@ public class Fragment_menu1_first extends Fragment {
     TextView RecommendTitle;
     TextView RecommendAddr1;
     CardView RecommendCardView;
-
+    private double mapx = 0.0;
+    private double mapy = 0.0;
     private int contentid = 0;
-
+    private String title;
     private OnItemClick mCallback;
    private Button allbutton;
    public static final String ALL_LIST = "ALL_LIST";
@@ -85,6 +86,9 @@ public class Fragment_menu1_first extends Fragment {
                 RecommendAddr1.setText(response.body().get(num).getAddr1());
 
                 contentid = response.body().get(num).getContentid();
+                mapx = response.body().get(num).getMapx();
+                mapy = response.body().get(num).getMapy();
+                title = response.body().get(num).getTitle();
             }
 
             @Override
@@ -102,6 +106,12 @@ public class Fragment_menu1_first extends Fragment {
                 Bundle args = new Bundle();
                 if (contentid != 0)
                     args.putInt("contentid", contentid);
+                if (mapx != 0.0)
+                    args.putDouble("mapx",mapx);
+                if (mapy != 0.0)
+                    args.putDouble("mapy",mapy);
+                if (title != null)
+                    args.putString("title",title);
 
                 fragment_menu2_tourInfo.setArguments(args);
 

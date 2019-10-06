@@ -211,9 +211,9 @@ public class Fragment_menu2_TourInfo extends Fragment {
                     pathInfo.put("rGoX", String.valueOf(mapx));
                     pathInfo.put("rGoY", String.valueOf(mapy));
 
-                    pathInfo.put("rStName", "출발지");
+              /*   pathInfo.put("rStName", "출발지");
                     pathInfo.put("rStX", "126.926252");
-                    pathInfo.put("rStY", "37.557607");
+                    pathInfo.put("rStY", "37.557607");*/
 
                     tMapTapi.invokeRoute(pathInfo);
                 } else { // --> T map not installed
