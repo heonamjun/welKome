@@ -69,6 +69,7 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         /*
                 GradeTour view 셋팅
          */
+        holder.setIsRecyclable(false);
         if (holder instanceof GradeTour) {
             ((GradeTour) holder).TourTitle.setText(GradeTourData.get(position).getTitle());
             ((GradeTour) holder).TourAdd1.setText(GradeTourData.get(position).getAddr1());
@@ -77,7 +78,7 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .getFirstimage2())
                     .into(((GradeTour) holder).TourImage);
 
-
+//            ((GradeTour)holder).TourCheckBox.setOnCheckedChangeListener(null);
 
             APIInterface apiInterface;
             apiInterface = APIClient.getClient().create(APIInterface.class);
@@ -90,8 +91,6 @@ public class firstpageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                     if(checkNumber == 1){
                         ((GradeTour)holder).TourCheckBox.setChecked(true);
-
-
                     }
 
                 }
